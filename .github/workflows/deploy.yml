@@ -5,7 +5,7 @@ on:
   push:
     paths: ["site/**", "pipeline/**", "data/**", ".github/workflows/deploy.yml"]
   schedule:
-    - cron: "17 20 * * *"   # 매일 05:17 KST
+    - cron: "17 20 * * *"   # 매일 05:17 KST (예약 실행은 항상 기본 브랜치에서 돈다)
   workflow_dispatch:
 
 permissions:
@@ -19,8 +19,9 @@ concurrency:
 
 jobs:
   build:
-    # 기본 브랜치에서만 배포(github-pages 환경은 기본 브랜치 배포만 허용)
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    # push는 기본 브랜치일 때만 배포(github-pages 환경은 기본 브랜치 배포만 허용).
+    # 예약 실행에는 github.event.repository 정보가 없으므로 push일 때만 브랜치를 확인한다.
+    if: github.event_name != 'push' || github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,14 +29,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r pipeline/requirements.txt
+      - id: pages
+        uses: actions/configure-pages@v5
       - name: 올림픽공원 공연정보 갱신
         run: python pipeline/fetch_events.py
         continue-on-error: true   # 원천 사이트 장애 시 저장된 일정으로 계속
-      - name: 예보 모델·데이터 생성
+      - name: 예보 모델·데이터·캘린더 피드 생성
         run: python pipeline/build_model.py
         env:
           OLPARK_FAST: ${{ github.event_name == 'schedule' && '1' || '0' }}
-      - uses: actions/configure-pages@v5
+          OLPARK_SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

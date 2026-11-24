@@ -1,9 +1,10 @@
-import { Forecaster, LEVEL_KEYS, LEVEL_LABEL, DOW, levelOf, fmtMin, parseYmd, nowKST, addDays } from './forecast.js';
+import { Forecaster, LEVEL_KEYS, LEVEL_LABEL, DOW, levelOf, fmtMin, parseYmd, nowKST, addDays, pad } from './forecast.js';
 import { forecastColumns, lineChart, hbarChart, sparkBars } from './charts.js';
 
 const LIVE_REFRESH_MS = 5 * 60 * 1000;
 const PARK = { lat: 37.5207, lon: 127.1214 };
-const STATE = { model: null, events: null, insights: null, fc: null, live: null, liveError: null, weather: null, date: null, calMonth: null };
+const STATE = { model: null, events: null, insights: null, fc: null, live: null, liveError: null, weather: null, date: null, calMonth: null, opsDays: 30 };
+const PURPOSE_LABEL = { show: '공연 관람', walk: '산책·나들이', sports: '운동·수영', kids: '아이와 함께' };
 
 const $ = (sel) => document.querySelector(sel);
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -124,8 +125,9 @@ function forecastFor(ds) {
 
 // ---------------------------------------------------------------- 라우팅
 function route() {
-  const [tab, arg] = (location.hash.replace('#', '') || 'forecast').split('/');
-  const views = ['forecast', 'plan', 'calendar', 'insights', 'about'];
+  const [tab, ...args] = decodeURIComponent(location.hash.replace('#', '') || 'forecast').split('/');
+  const arg = args[0];
+  const views = ['forecast', 'plan', 'calendar', 'ops', 'insights', 'about'];
   const cur = views.includes(tab) ? tab : 'forecast';
   document.querySelectorAll('.view').forEach((v) => { v.hidden = v.dataset.view !== cur; });
   document.querySelectorAll('.tabs a').forEach((a) => {
@@ -134,10 +136,42 @@ function route() {
   if (cur === 'forecast') {
     if (arg && /^\d{4}-\d{2}-\d{2}$/.test(arg)) STATE.date = arg;
     renderForecast();
-  } else if (cur === 'plan') renderPlan();
+  } else if (cur === 'plan') renderPlan(args);
   else if (cur === 'calendar') renderCalendar();
+  else if (cur === 'ops') renderOps();
   else if (cur === 'insights') renderInsights();
   else if (cur === 'about') renderAbout();
+}
+
+function toast(msg) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.hidden = false;
+  clearTimeout(toast.t);
+  toast.t = setTimeout(() => { el.hidden = true; }, 2600);
+}
+
+function downloadBlob(text, filename, type) {
+  const url = URL.createObjectURL(new Blob([text], { type }));
+  const a = h('a', { href: url, download: filename });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/** 공연 영향 등으로 혼잡이 이어지는 구간 중 '지금 이후'만 */
+function rangesFrom(fc, minLevel, fromMin) {
+  return STATE.fc.busyRanges(fc, minLevel).filter((b) => fromMin == null || b.end > fromMin);
 }
 
 // ---------------------------------------------------------------- 혼잡 예보
@@ -186,8 +220,9 @@ function renderHero(fc, today) {
     if (rest.length) pk = rest.reduce((a, s) => (s.final > a.final ? s : a), rest[0]);
   }
   const when = fc.ds === today ? '오늘' : fc.ds === addDays(today, 1) ? '내일' : mdLabel(fc.ds);
-  const best = STATE.fc.bestWindow(fc, 7, 21, 4, fc.ds === today ? Math.ceil(nowKST().min / 30) * 30 : null);
-  const busy = STATE.fc.busyRanges(fc, 'busy');
+  const fromMin = isToday ? Math.ceil(nowKST().min / 30) * 30 : null;
+  const best = STATE.fc.bestWindow(fc, 7, 21, 4, fromMin);
+  const busy = rangesFrom(fc, 'busy', isToday ? nowKST().min : null);
   const top = h('div', { class: 'hero-top' },
     h('div', { class: `hero-icon ${pk.level}` }, levelIcon(pk.level, 44)),
     h('div', {},
@@ -363,21 +398,82 @@ function renderWeek(today) {
 }
 
 // ---------------------------------------------------------------- 방문 플래너
-function renderPlan() {
+function addDateOption(ds, isToday) {
+  const n = new Set(STATE.fc.showsOn(ds).map((s) => s.evtSeq)).size;
+  $('#planDate').append(h('option', { value: ds, text: `${mdLabel(ds)}${isToday ? ' 오늘' : ''}${n ? ` · 공연 ${n}건` : ''}` }));
+}
+
+/** 공유 링크 형식: #plan/날짜/목적/이동수단/공연번호-시작분 */
+function renderPlan(args = []) {
   const today = nowKST().ds;
   const dateSel = $('#planDate');
   if (!dateSel.options.length) {
-    for (let i = 0; i < 45; i++) {
-      const ds = addDays(today, i);
-      const n = (STATE.fc.showsOn(ds) || []).length;
-      dateSel.append(h('option', { value: ds, text: `${mdLabel(ds)}${i === 0 ? ' 오늘' : ''}${n ? ` · 공연 ${new Set(STATE.fc.showsOn(ds).map((s) => s.evtSeq)).size}건` : ''}` }));
-    }
+    for (let i = 0; i < 45; i++) addDateOption(addDays(today, i), i === 0);
     const firstShow = Array.from(dateSel.options).find((o) => STATE.fc.showsOn(o.value).some((s) => s.peakCars >= 300));
     if (firstShow) dateSel.value = firstShow.value;
     $('#planForm').addEventListener('change', (e) => { if (e.target.id === 'planDate') fillShows(); computePlan(); });
     fillShows();
   }
+  const [ds, purpose, mode, showKey] = args;
+  if (ds && /^\d{4}-\d{2}-\d{2}$/.test(ds) && ds >= today) {
+    if (![...dateSel.options].some((o) => o.value === ds)) addDateOption(ds, false);
+    dateSel.value = ds;
+    fillShows();
+  }
+  if (purpose && PURPOSE_LABEL[purpose]) {
+    const r = document.querySelector(`input[name="purpose"][value="${purpose}"]`);
+    if (r) r.checked = true;
+  }
+  if (mode === 'car' || mode === 'transit') $('#planMode').value = mode;
+  if (showKey) {
+    const v = showKey.replace('-', '|');
+    if ([...$('#planShow').options].some((o) => o.value === v)) $('#planShow').value = v;
+  }
   computePlan();
+}
+
+function planHash() {
+  const purpose = new FormData($('#planForm')).get('purpose');
+  const parts = ['plan', $('#planDate').value, purpose, $('#planMode').value];
+  if (purpose === 'show' && $('#planShow').value) parts.push($('#planShow').value.replace('|', '-'));
+  return `#${parts.join('/')}`;
+}
+
+// ---------------------------------------------------------------- 캘린더 파일(.ics)
+function icsDate(ds, min) { // 한국 시간(UTC+9, 서머타임 없음) → UTC
+  const [y, m, d] = ds.split('-').map(Number);
+  const t = new Date(Date.UTC(y, m - 1, d) + (min - 540) * 60000);
+  return `${t.getUTCFullYear()}${pad(t.getUTCMonth() + 1)}${pad(t.getUTCDate())}T${pad(t.getUTCHours())}${pad(t.getUTCMinutes())}00Z`;
+}
+function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+function icsFold(line) { // RFC 5545: 한 줄 75바이트 이하(여기서는 73바이트로 접음)
+  const enc = new TextEncoder();
+  const out = [];
+  let cur = '';
+  let bytes = 0;
+  for (const ch of line) {
+    const b = enc.encode(ch).length;
+    if (bytes + b > 73) { out.push(cur); cur = ` ${ch}`; bytes = 1 + b; } else { cur += ch; bytes += b; }
+  }
+  out.push(cur);
+  return out.join('\r\n');
+}
+function buildIcs(ev) {
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//OlParkCast//Olympic Park crowd forecast//KO', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+    'BEGIN:VEVENT', `UID:${ev.uid}`, `DTSTAMP:${stamp}`, `DTSTART:${icsDate(ev.ds, ev.start)}`, `DTEND:${icsDate(ev.ds, ev.end)}`,
+    `SUMMARY:${icsEsc(ev.summary)}`, `LOCATION:${icsEsc(ev.location)}`, `DESCRIPTION:${icsEsc(ev.description)}`, `URL:${ev.url}`,
+    'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${icsEsc(ev.alarm)}`, `TRIGGER:-PT${ev.alarmMin}M`, 'END:VALARM',
+    'END:VEVENT', 'END:VCALENDAR'];
+  return `${lines.map(icsFold).join('\r\n')}\r\n`;
+}
+
+async function sharePlan(title) {
+  const url = location.href;
+  if (navigator.share) {
+    try { await navigator.share({ title, url }); return; } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  toast((await copyText(url)) ? '링크를 복사했어요. 메신저에 붙여 넣어 공유하세요.' : `이 주소를 복사해 공유하세요: ${url}`);
 }
 
 function fillShows() {
@@ -401,6 +497,8 @@ function computePlan() {
   const steps = [];
   let headline = '';
   let sub = '';
+  let planEvent = null; // 캘린더에 넣을 일정
+  const parkLoc = '올림픽공원(서울 송파구 올림픽로 424)';
   const lotsLow = Object.entries(STATE.model.lotFullShare).filter(([k]) => STATE.model.lots[k]).sort((a, b) => a[1] - b[1]).slice(0, 3).map(([k]) => k);
   const lotChip = (k) => h('span', { class: 'lot' }, k, h('small', { text: `${STATE.model.lots[k]?.gate || ''}${STATE.model.lotFullShare[k] != null ? ` · 만차기록 ${pct(STATE.model.lotFullShare[k])}` : ''}` }));
   const outside = '남3문(소마미술관 지하)·남4문·서1문·서2문(올림픽파크텔) 주차장';
@@ -421,40 +519,81 @@ function computePlan() {
       steps.push(['출입문·주차장', h('span', {}, `${show.venueInfo.label}와 가까운 출입문은 ${show.venueInfo.gates.join('·')}, 가까운 주차구역은 `, ...show.venueInfo.lots.map(lotChip), '. 만차 기록이 적은 구역: ', ...lotsLow.map(lotChip))]);
       steps.push(['만차일 때', `${outside}을 이용하세요. 대형 공연일에는 선불·사전정산·일주차권이 없고 관람권 할인도 없어요(소형 10분당 600원, 하루 최대 20,000원).`]);
       steps.push(['귀가', `공연 종료(${fmtMin(end)}) 직후 30~60분은 출차가 몰려요. 20~30분 여유를 두고 출차하면 대기가 줄어요.`]);
+      planEvent = {
+        start: adv.arriveBy, end: show.start, summary: `올림픽공원 도착 목표 · ${show.title}`,
+        location: `${show.venueInfo.label}, ${parkLoc}`,
+        description: [`공연 시작 ${fmtMin(show.start)} · 예상 종료 ${fmtMin(end)}`, sub,
+          `가까운 출입문 ${show.venueInfo.gates.join('·')} / 주차구역 ${show.venueInfo.lots.join('·')} / 만차 기록이 적은 구역 ${lotsLow.join('·')}`,
+          `만차 시: ${outside}`, '귀가: 종료 직후 30~60분은 출차가 몰려요.'].join('\n'),
+      };
     } else {
-      headline = `${fmtMin(show.start - (show.cls === 'B' ? 90 : 60))}쯤 도착을 권장해요`;
+      const arrive = show.start - (show.cls === 'B' ? 90 : 60);
+      headline = `${fmtMin(arrive)}쯤 도착을 권장해요`;
       sub = show.cls === 'B' ? '팬덤 공연은 입장 대기·MD 구매로 일찍 붐벼요.' : '입장 대기를 고려해 여유 있게 도착하세요.';
       steps.push(['지하철', `${venueTransit(show.venue)}이 가장 가까워요.`]);
       steps.push(['버스', '동1문(올림픽공원역) 정류장: 3214·3220·3319·3412·3413, 경기 30-5 등']);
       steps.push(['귀가 분산', `공연 종료(${fmtMin(end)}) 직후 올림픽공원역에 관객이 몰려요. 8호선은 몽촌토성역(1번 출구), 9호선은 한성백제역(2번 출구)으로 걸어가면 승강장 혼잡을 피할 수 있어요.`]);
+      planEvent = {
+        start: arrive, end: show.start, summary: `올림픽공원 도착 · ${show.title}`,
+        location: `${show.venueInfo.label}, ${parkLoc}`,
+        description: [`공연 시작 ${fmtMin(show.start)} · 예상 종료 ${fmtMin(end)}`, sub, `지하철: ${venueTransit(show.venue)}`,
+          '귀가 분산: 8호선 몽촌토성역(1번 출구), 9호선 한성백제역(2번 출구)'].join('\n'),
+      };
     }
   } else {
     const ranges = { walk: [7, 20], sports: [6, 22], kids: [9, 18] }[purpose];
     const nowMin = ds === nowKST().ds ? Math.ceil(nowKST().min / 30) * 30 : null;
     const best = STATE.fc.bestWindow(fc, ranges[0], ranges[1], 4, nowMin);
-    const busy = STATE.fc.busyRanges(fc, 'normal');
+    const busy = rangesFrom(fc, 'normal', nowMin);
     headline = best ? `${fmtMin(best.start)}~${fmtMin(best.end)}이 가장 한산해요` : '오늘 남은 시간은 모두 붐벼요';
     sub = best ? `이 시간대 예상 이용률 평균 ${pct(best.avg / cap)} (${LEVEL_LABEL[best.level]})` : '';
     if (busy.length) steps.push(['피하면 좋은 시간', `${busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(', ')} (이용률 50% 이상 예상)`]);
+    const subway = '8호선 몽촌토성역 1번 출구(세계평화의문·몽촌토성), 5·9호선 올림픽공원역 3·4번 출구(만남의광장·장미광장), 9호선 한성백제역 2번 출구(남4문·한성백제박물관)';
     if (purpose === 'walk') {
       steps.push(['출입문', '평화의광장·몽촌토성 산책은 8호선 몽촌토성역(1번 출구) 쪽 세계평화의문, 장미광장·들꽃마루는 동2문 쪽이 가까워요.']);
-      steps.push(['주차', h('span', {}, `자가용이라면 만차 기록이 적은 구역을 노리세요: `, ...lotsLow.map(lotChip), `. 공연이 있는 날 오후에는 ${outside}이 대안이에요.`)]);
+      if (mode === 'car') steps.push(['주차', h('span', {}, '만차 기록이 적은 구역을 노리세요: ', ...lotsLow.map(lotChip), `. 공연이 있는 날 오후에는 ${outside}이 대안이에요.`)]);
+      else steps.push(['지하철', `가고 싶은 곳과 가까운 역을 고르세요: ${subway}.`]);
     } else if (purpose === 'sports') {
       steps.push(['평일 오전 피크', '평일은 오전 10~11시(수영장·스포츠센터 이용 시간)에 가장 붐벼요. 9시 이전이나 13시 이후가 여유로워요.']);
-      steps.push(['가까운 주차장', h('span', {}, '올림픽수영장은 ', lotChip('P4'), '(117대), 올림픽테니스경기장은 ', lotChip('P11'), '(190대)이 가까워요.')]);
+      if (mode === 'car') steps.push(['가까운 주차장', h('span', {}, '올림픽수영장은 ', lotChip('P4'), '(117대), 올림픽테니스경기장은 ', lotChip('P11'), '(190대)이 가까워요.')]);
+      else steps.push(['지하철', '올림픽수영장·올림픽테니스경기장은 5·9호선 올림픽공원역이 가장 가까워요.']);
     } else {
       steps.push(['가족 나들이', '서울백제어린이박물관·피크닉장·88호수수변무대는 북2문(P4·P5), 88잔디마당·장미광장은 동2문이 가까워요.']);
       steps.push(['주말 낮 주의', '봄·가을 주말 13~15시는 주차구역 만차 기록이 가장 많은 시간대예요. 오전 10시 이전 도착을 권장해요.']);
+      if (mode === 'transit') steps.push(['지하철', `${subway}.`]);
     }
     if (fc.shows.some((s) => s.peakCars >= 300)) steps.push(['공연 있는 날', `이날은 대형 공연이 있어 공연 시작 전후(${fc.shows.filter((s) => s.peakCars >= 300).map((s) => fmtMin(s.start)).join(', ')})로 주차장이 붐벼요.`]);
+    if (best) {
+      planEvent = {
+        start: best.start, end: best.end, summary: `올림픽공원 ${PURPOSE_LABEL[purpose]} (한산한 시간대)`, location: parkLoc,
+        description: [`예상 이용률 평균 ${pct(best.avg / cap)}(${LEVEL_LABEL[best.level]})`,
+          busy.length ? `피하면 좋은 시간: ${busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(', ')}` : '',
+          `만차 기록이 적은 주차구역: ${lotsLow.join('·')}`].filter(Boolean).join('\n'),
+      };
+    }
   }
   steps.push(['교통약자', '휠체어 이용 시 동2문 → 그래피티의 벽 주차장 → 올림픽공원역 방향 경사로로 만남의광장에 진입할 수 있어요.']);
 
+  history.replaceState(null, '', planHash());
+  const shareTitle = `올팍캐스트 · ${mdLabel(ds)} ${PURPOSE_LABEL[purpose]} 추천 동선`;
+  const actions = h('div', { class: 'plan-actions' },
+    h('button', { class: 'btn', type: 'button', onclick: () => sharePlan(shareTitle) }, '링크 공유'),
+    planEvent ? h('button', {
+      class: 'btn ghost', type: 'button',
+      onclick: () => {
+        const ics = buildIcs({ ...planEvent, ds, uid: `${ds}-${purpose}-${planEvent.start}@olparkcast`, url: location.href,
+          description: `${planEvent.description}\n\n${location.href}`, alarm: '올림픽공원 출발 준비 — 올팍캐스트 예보를 확인하세요', alarmMin: 60 });
+        downloadBlob(ics, `olparkcast-${ds.replace(/-/g, '')}.ics`, 'text/calendar;charset=utf-8');
+        toast('캘린더 파일을 내려받았어요. 열면 일정과 1시간 전 알림이 추가돼요.');
+      },
+    }, '캘린더에 추가') : null);
+
   const hero = h('article', { class: 'card plan-hero' },
-    h('p', { class: 'hero-kicker', text: `${mdLabel(ds)} · ${({ show: '공연 관람', walk: '산책·나들이', sports: '운동·수영', kids: '아이와 함께' })[purpose]}${purpose === 'show' ? (mode === 'car' ? ' · 자가용' : ' · 대중교통') : ''}` }),
+    h('p', { class: 'hero-kicker', text: `${mdLabel(ds)} · ${PURPOSE_LABEL[purpose]} · ${mode === 'car' ? '자가용' : '대중교통'}` }),
     h('div', { class: 'big', text: headline }),
     sub ? h('p', { class: 'card-sub', text: sub }) : null,
-    h('div', {}, levelBadge(fc.peak.level, `이날 최대 ${fmtMin(fc.peak.min)} ${pct(fc.peak.ratio)}`)));
+    h('div', {}, levelBadge(fc.peak.level, `이날 최대 ${fmtMin(fc.peak.min)} ${pct(fc.peak.ratio)}`)),
+    actions);
   const stepsCard = h('article', { class: 'card' }, h('h2', { class: 'card-title', text: '추천 동선' }),
     h('ol', { class: 'steps' }, steps.map(([t, body]) => h('li', {}, h('strong', { text: t }), body instanceof Node ? body : h('span', { text: body })))));
   const chartCard = h('article', { class: 'card' }, h('h2', { class: 'card-title', text: `${mdLabel(ds)} 시간대별 예보` }), h('div', { class: 'chart', id: 'planChart' }));
@@ -506,6 +645,113 @@ function renderCalendar() {
     sw.style.cssText = `display:inline-block;width:10px;height:10px;border-radius:3px;background:${clsColor[c]};margin-right:6px`;
     return h('span', {}, sw, h('b', { text: `${STATE.model.classes[c].name} ` }), STATE.model.classes[c].desc);
   }), h('span', { class: 'muted', text: '날씨 아이콘 = 그날 예상 최대 혼잡 단계' }));
+  renderSubscribe($('#calSubscribe'));
+}
+
+// ---------------------------------------------------------------- 만차 위험일 캘린더 구독(파이프라인이 매일 만드는 data/risk-days.ics)
+function renderSubscribe(el) {
+  const url = new URL('data/risk-days.ics', location.href).href;
+  const webcal = url.replace(/^https?:/, 'webcal:');
+  const google = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`;
+  el.replaceChildren(
+    h('h2', { class: 'card-title', text: '혼잡 예보 캘린더 구독' }),
+    h('p', { class: 'card-sub', text: '혼잡(이용률 70% 이상)·만차 위험(90% 이상)이 예상되는 시간대가 휴대폰 캘린더에 일정으로 들어옵니다. 공연정보가 바뀌면 매일 자동으로 갱신돼요.' }),
+    h('div', { class: 'url' }, h('code', { text: url }),
+      h('button', { class: 'btn ghost', type: 'button', onclick: async () => toast((await copyText(url)) ? '구독 주소를 복사했어요' : url) }, '주소 복사')),
+    h('div', { class: 'plan-actions' },
+      h('a', { class: 'btn', href: webcal }, '캘린더 앱으로 구독'),
+      h('a', { class: 'btn ghost', href: google, target: '_blank', rel: 'noopener' }, 'Google 캘린더에 추가')));
+}
+
+// ---------------------------------------------------------------- 운영 리포트(기관용)
+function opsActions(fc, full, busy, shows) {
+  const acts = [];
+  const peak = Math.max(...fc.slots.map((s) => s.final));
+  const over = Math.round(peak - STATE.model.capacity);
+  const big = shows.filter((s) => s.peakCars >= 150);
+  if (over > 0) acts.push(`수요 초과 약 ${over.toLocaleString()}대 — 남3·남4·서2문 주차장 안내, 만차 30분 전부터 만차 안내 방송·전광판`);
+  else if (full.length) acts.push(`${full.map((r) => `${fmtMin(r.start)}~${fmtMin(r.end)}`).join(', ')} 만차 위험 — 주차요원 증원, 출입문 진입 안내 준비`);
+  else if (busy.length) acts.push(`${busy.map((r) => `${fmtMin(r.start)}~${fmtMin(r.end)}`).join(', ')} 혼잡 — 출입문 안내 인력 배치`);
+  if (big.some((s) => s.cls === 'A')) acts.push('자가용 집중형 공연 — 기획사와 예매자 대상 대중교통 이용 사전 안내');
+  if (new Set(big.map((s) => s.venue)).size >= 2) acts.push('동시 공연 — 공연장별 진입·귀가 동선 분리');
+  const late = big.filter((s) => s.start + s.dur >= 20 * 60);
+  if (late.length) acts.push(`공연 종료(${fmtMin(Math.max(...late.map((s) => s.start + s.dur)))}) 후 귀가 분산 안내(몽촌토성역·한성백제역)`);
+  const d = parseYmd(fc.ds);
+  const springFall = [3, 4, 5, 6, 9, 10, 11].includes(d.getMonth() + 1);
+  // 공연을 뺀 평소 수요만으로도 낮 시간이 붐비는 봄·가을 주말(혼잡도 기록상 만차가 몰리는 때)
+  const leisureBusy = fc.slots.some((s) => s.min >= 11 * 60 && s.min < 16 * 60 && s.base / STATE.model.capacity >= 0.55);
+  if ((fc.type !== 'weekday') && springFall && leisureBusy) acts.push('봄·가을 주말 나들이 수요 — 낮 시간(13~15시) 주차구역 만차 주의');
+  return acts.length ? acts : ['평시 운영'];
+}
+
+function opsRows(n) {
+  const today = nowKST().ds;
+  const rows = [];
+  for (let i = 0; i < n; i++) {
+    const ds = addDays(today, i);
+    const fc = STATE.fc.forecast(ds, {}); // 계획용 기본 예보(실시간·날씨 보정 제외)
+    const full = STATE.fc.busyRanges(fc, 'full');
+    const busy = STATE.fc.busyRanges(fc, 'busy');
+    const shows = [...new Map(fc.shows.map((s) => [s.evtSeq, s])).values()].sort((a, b) => b.peakCars - a.peakCars);
+    const peak = fc.slots.reduce((a, s) => (s.min >= 360 && s.final > a.final ? s : a), fc.slots[12]);
+    rows.push({ ds, fc, peak, full, busy, shows, over: Math.max(0, Math.round(peak.final - STATE.model.capacity)), actions: opsActions(fc, full, busy, shows) });
+  }
+  return rows;
+}
+
+function renderOps() {
+  const n = STATE.opsDays;
+  document.querySelectorAll('input[name="opsDays"]').forEach((r) => { r.checked = Number(r.value) === n; });
+  const rows = opsRows(n);
+  const fullDays = rows.filter((r) => r.peak.ratio >= 0.9);
+  const busyDays = rows.filter((r) => r.peak.ratio >= 0.7 && r.peak.ratio < 0.9);
+  const top = rows.reduce((a, r) => (r.peak.final > a.peak.final ? r : a), rows[0]);
+  const aDays = rows.filter((r) => r.shows.some((s) => s.cls === 'A' && s.peakCars >= 150));
+  const tiles = [
+    ['만차 위험일', `${fullDays.length}일`, '최대 이용률 90% 이상'],
+    ['혼잡일', `${busyDays.length}일`, '최대 이용률 70~90%'],
+    ['가장 붐비는 날', pct(top.peak.ratio), `${mdLabel(top.ds)} ${fmtMin(top.peak.min)}쯤`],
+    ['자가용 집중형 공연일', `${aDays.length}일`, '사전 대중교통 안내 권장'],
+  ];
+  $('#opsStats').replaceChildren(...tiles.map(([l, v, d]) => h('div', { class: 'stat' }, h('div', { class: 'label', text: l }), h('div', { class: 'value', text: v }), h('div', { class: 'desc', text: d }))));
+  const listed = rows.filter((r) => r.peak.ratio >= 0.7);
+  const box = $('#opsTable');
+  if (!listed.length) {
+    box.replaceChildren(h('p', { class: 'empty', text: `향후 ${n}일 동안 이용률 70% 이상이 예상되는 날이 없어요.` }));
+  } else {
+    box.replaceChildren(h('table', {},
+      h('thead', {}, h('tr', {}, ['날짜', '최대 예상', '혼잡 시간대(70%↑)', '수용 초과', '주요 공연', '권장 조치'].map((t, i) => h('th', { class: i === 3 ? 'num' : null, text: t })))),
+      h('tbody', {}, listed.map((r) => h('tr', {},
+        h('td', { class: 'nowrap day', 'data-label': '날짜' }, h('a', { href: `#forecast/${r.ds}`, text: mdLabel(r.ds) })),
+        h('td', { class: 'nowrap', 'data-label': '최대 예상' }, levelBadge(r.peak.level, `${pct(r.peak.ratio)} · ${fmtMin(r.peak.min)}`)),
+        h('td', { 'data-label': '혼잡 시간대', text: r.busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(', ') || '—' }),
+        h('td', { class: 'num', 'data-label': '수용 초과', text: r.over ? `${r.over.toLocaleString()}대` : '—' }),
+        h('td', { class: 'evs', 'data-label': '주요 공연' }, r.shows.filter((s) => s.peakCars >= 60).slice(0, 3).map((s) => h('div', {}, `${fmtMin(s.start)} ${s.venue} `, clsBadge(s.cls), ` ${s.title}`))),
+        h('td', { class: 'act', 'data-label': '권장 조치' }, r.actions.map((a) => h('div', { text: `· ${a}` }))))))));
+  }
+  $('#opsNote').textContent = `예보 기준: 2024년 7월 입출차 기록으로 학습한 모델 + 올림픽공원 공연정보(${STATE.events.generatedAt.slice(0, 10)} 갱신). 당일 운영에는 '혼잡 예보' 화면의 실시간 보정 값을 함께 확인하세요.`;
+  renderSubscribe($('#opsSubscribe'));
+}
+
+function opsCsv() {
+  const rows = opsRows(STATE.opsDays);
+  const esc = (v) => { // 스프레드시트 수식 실행 방지(공연명 등 외부 문자열)
+    const t = String(v);
+    return `"${(/^[=+\-@]/.test(t) ? `'${t}` : t).replace(/"/g, '""')}"`;
+  };
+  const head = ['날짜', '요일', '최대이용률(%)', '최대시각', '예상최대대수', '수용초과대수', '혼잡시간대(70%이상)', '만차위험시간대(90%이상)', '공연(시작·공연장·관객유형·제목)', '권장조치'];
+  const body = rows.map((r) => [r.ds, DOW[parseYmd(r.ds).getDay()], Math.round(r.peak.ratio * 100), fmtMin(r.peak.min), Math.round(r.peak.final), r.over,
+    r.busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(' / '), r.full.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(' / '),
+    r.shows.map((s) => `${fmtMin(s.start)} ${s.venue} ${STATE.model.classes[s.cls].name} ${s.title}`).join(' / '), r.actions.join(' / ')]);
+  const csv = `﻿${[head, ...body].map((row) => row.map(esc).join(',')).join('\r\n')}\r\n`;
+  downloadBlob(csv, `olparkcast-ops-${nowKST().ds.replace(/-/g, '')}-${STATE.opsDays}d.csv`, 'text/csv;charset=utf-8');
+  toast('CSV 파일을 내려받았어요');
+}
+
+function setupOps() {
+  document.querySelectorAll('input[name="opsDays"]').forEach((r) => r.addEventListener('change', () => { STATE.opsDays = Number(r.value); renderOps(); }));
+  $('#opsCsv').addEventListener('click', opsCsv);
+  $('#opsPrint').addEventListener('click', () => window.print());
 }
 
 // ---------------------------------------------------------------- 데이터 인사이트
@@ -603,8 +849,27 @@ function setupTheme() {
   });
 }
 
+// ---------------------------------------------------------------- 오프라인(공연장 주변 통신 혼잡 대비)
+function updateNetBanner() {
+  const b = $('#netBanner');
+  if (navigator.onLine) { b.hidden = true; return; }
+  b.hidden = false;
+  b.textContent = `오프라인 상태예요. 마지막으로 저장된 예보(공연정보 ${STATE.events ? STATE.events.generatedAt.slice(0, 10) : ''} 기준)를 보여 드려요. 연결되면 실시간 주차현황을 다시 불러와요.`;
+}
+window.addEventListener('offline', updateNetBanner);
+window.addEventListener('online', async () => { updateNetBanner(); if (STATE.model) { await fetchLive(); updateFreshness(); route(); } });
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => { /* 지원 안 함 */ }); });
+}
+
 let resizeTimer;
-window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(route, 200); });
+let lastWidth = window.innerWidth;
+window.addEventListener('resize', () => { // 모바일 주소창 높이 변화로는 다시 그리지 않음
+  if (window.innerWidth === lastWidth) return;
+  lastWidth = window.innerWidth;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(route, 200);
+});
 window.addEventListener('hashchange', route);
 $('#calPrev').addEventListener('click', () => { const [y, m] = STATE.calMonth.split('-').map(Number); const d = new Date(y, m - 2, 1); STATE.calMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; renderCalendar(); });
 $('#calNext').addEventListener('click', () => { const [y, m] = STATE.calMonth.split('-').map(Number); const d = new Date(y, m, 1); STATE.calMonth = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; renderCalendar(); });
@@ -621,6 +886,8 @@ async function main() {
     return;
   }
   setupTheme();
+  setupOps();
+  updateNetBanner();
   route();
   updateFreshness();
   document.body.classList.remove('loading');

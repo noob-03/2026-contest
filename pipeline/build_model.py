@@ -101,9 +101,16 @@ LOTS = {
 }
 LOT_SPACES = {"P1": 562, "P2": 320, "P4": 117, "P5": 176, "P6": 167, "P7": 137, "P11": 190}
 
-KEYWORDS_A = r"트로트|디너쇼|가요제|효도|\d{2}\s*주년"
+# 관객유형 자동 분류 사전(검수표에 없는 새 공연에 적용). 운영 단계에서는 예매자 연령대 통계로 대체를 제안한다.
+KEYWORDS_A = r"트로트|트롯|미스터\s*트롯|미스\s*트롯|현역가왕|무명전설|트롯맨|디너쇼|가요제|효도|\d{2}\s*주년"
+ARTISTS_A = [  # 중장년 팬층 비중이 큰 가수·공연(자가용 집중형)
+    "임영웅", "이찬원", "영탁", "장민호", "김희재", "정동원", "박서진", "손태진", "박지현", "송가인", "양지은", "김호중",
+    "진성", "나훈아", "조용필", "이문세", "이승철", "신승훈", "임재범", "성시경", "SG워너비", "김건모", "변진섭", "이선희",
+    "인순이", "심수봉", "주현미", "장윤정", "쎄시봉", "부활", "들국화", "양희은", "최백호", "이은미", "김범수", "박효신",
+]
+ARTISTS_C = ["god", "어반자카파", "다비치", "DAVICHI", "잔나비", "권진아", "재즈페스티벌", "재즈 페스티벌", "JAZZ FE"]  # 20~40대 혼합
 KEYWORDS_FAMILY = r"가족|어린이|키즈|아기상어|핑크퐁|티니핑|하츄핑|뽀로로|타요|콩순이"
-KEYWORDS_B = r"WORLD\s*TOUR|ASIA\s*TOUR|FAN\s*-?\s*CON|FAN\s*-?\s*MEETING|FANMEETING|팬미팅|SHOWCASE|쇼케이스|K-?POP|KCON|아이돌|IN\s+SEOUL"
+KEYWORDS_B = r"WORLD\s*TOUR|ASIA\s*TOUR|FAN\s*-?\s*CON|FAN\s*-?\s*MEETING|FANMEETING|팬미팅|SHOWCASE|쇼케이스|K-?POP|KCON|아이돌|IN\s+SEOUL|내한"
 
 
 # ---------------------------------------------------------------- 공연 일정
@@ -123,8 +130,10 @@ def classify(ev: dict, tags: dict) -> tuple[str, str, str]:
     age = ev.get("seeAge") or ""
     if re.search(KEYWORDS_FAMILY, title) or re.search(r"(24|36)\s*개월", age):
         return "C", "자동", "가족·어린이 공연"
-    if re.search(KEYWORDS_A, title):
-        return "A", "자동", "중장년 팬층 공연 키워드"
+    if re.search(KEYWORDS_A, title) or any(a in title for a in ARTISTS_A):
+        return "A", "자동", "중장년 팬층 공연(분류 사전)"
+    if any(re.search(rf"(?<![A-Za-z]){re.escape(a)}(?![A-Za-z])", title, re.I) for a in ARTISTS_C):
+        return "C", "자동", "20~40대 혼합 관객(분류 사전)"
     letters = re.findall(r"[A-Za-z]", title)
     hangul = re.findall(r"[가-힣]", title)
     if re.search(KEYWORDS_B, title, re.I) or (len(letters) >= 8 and len(letters) > 2 * len(hangul)):
@@ -345,6 +354,104 @@ def lot_stats() -> dict:
     }
 
 
+# ---------------------------------------------------------------- 혼잡 예보 캘린더(.ics) 피드
+
+SITE_URL = (os.environ.get("OLPARK_SITE_URL") or "https://noob-03.github.io/2026-contest/").rstrip("/") + "/"  # 배포 주소(워크플로가 지정)
+
+
+def forecast_day(model: dict, day_shows: list, d: date) -> np.ndarray:
+    """웹 예보 엔진(site/assets/js/forecast.js)과 같은 식으로 하루 30분 단위 점유대수를 계산(실시간·날씨 보정 제외)."""
+    t = day_type(d)
+    mf = model["monthFactor"][d.month - 1]
+    floor = model["floor"][t]
+    b = np.maximum(0, np.array(model["base"][t], dtype=float))
+    occ = np.minimum(b, floor) + np.maximum(0, b - floor) * mf
+    c = model["curve"]
+    for sh in day_shows:
+        seats = model["venues"].get(sh["venue"], model["venues"]["기타"])["seats"]
+        coef = model["eventCoef"].get(sh["cls"], model["eventCoef"]["C"])
+        occ = occ + seats / 1000 * coef * show_curve(sh["start"], sh["dur"], c["leadHours"], c["power"], c["tailHours"], c["extraHours"])
+    return occ
+
+
+def _ics_fold(line: str) -> str:
+    out, cur, n = [], "", 0
+    for ch in line:
+        b = len(ch.encode("utf-8"))
+        if n + b > 73:
+            out.append(cur)
+            cur, n = " " + ch, 1 + b
+        else:
+            cur, n = cur + ch, n + b
+    out.append(cur)
+    return "\r\n".join(out)
+
+
+def _ics_esc(s: str) -> str:
+    return s.replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
+
+
+def _short_title(title: str, n: int = 24) -> str:
+    t = re.sub(r"^\s*[\[［(（]?서울[\]］)）]?\s*", "", title).strip()
+    return t if len(t) <= n else t[: n - 1] + "…"
+
+
+def _ics_time(d: date, minute: int) -> str:
+    t = datetime(d.year, d.month, d.day, tzinfo=KST) + timedelta(minutes=int(minute))
+    return t.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+
+def write_risk_ics(model: dict, by_date: dict, today: date, days: int = 90) -> int:
+    """혼잡(70%↑)·만차 위험(90%↑) 예상 시간대를 구독용 캘린더 파일로 만든다."""
+    cap = model["capacity"]
+    names = {k: v["name"] for k, v in model["classes"].items()}
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//OlParkCast//Olympic Park crowd forecast//KO", "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", "X-WR-CALNAME:올팍캐스트 올림픽공원 혼잡 예보", "X-WR-TIMEZONE:Asia/Seoul",
+             "X-WR-CALDESC:" + _ics_esc("올림픽공원 동2·남2·북2문 주차장 혼잡(70% 이상)·만차 위험(90% 이상) 예상 시간대. 매일 자동 갱신."),
+             "REFRESH-INTERVAL;VALUE=DURATION:PT12H", "X-PUBLISHED-TTL:PT12H"]
+    n_events = 0
+    for i in range(days):
+        d = today + timedelta(days=i)
+        day_shows = by_date.get(str(d), [])
+        occ = forecast_day(model, day_shows, d)
+        ratio = occ / cap
+        k = 12  # 06:00부터
+        while k < NSLOT:
+            if ratio[k] < 0.7:
+                k += 1
+                continue
+            s = k
+            while k < NSLOT and ratio[k] >= 0.7:
+                k += 1
+            seg = slice(s, k)
+            pk = s + int(np.argmax(occ[seg]))
+            full = bool(ratio[seg].max() >= 0.9)
+            start, end = s * SLOT_MIN, k * SLOT_MIN
+            label = "만차 위험" if full else "혼잡"
+            uniq = {}
+            for sh in day_shows:
+                uniq.setdefault(sh["evtSeq"], sh)
+            big = sorted(uniq.values(), key=lambda x: -model["venues"].get(x["venue"], model["venues"]["기타"])["seats"] * model["eventCoef"][x["cls"]])
+            desc = [f"예상 최대 이용률 {ratio[pk] * 100:.0f}% ({pk * SLOT_MIN // 60:02d}:{pk * SLOT_MIN % 60:02d}쯤, 약 {occ[pk]:,.0f}대 / {cap:,}면)"]
+            for sh in big[:3]:
+                desc.append(f"공연: {sh['start'] // 60:02d}:{sh['start'] % 60:02d} {sh['venue']} {sh['title']} ({names.get(sh['cls'], sh['cls'])})")
+            desc.append("대형 공연일에는 대중교통(5·9호선 올림픽공원역)을 이용하세요. 귀가 시 몽촌토성역(8호선)·한성백제역(9호선) 분산 이용.")
+            desc.append(f"예보 보기: {SITE_URL}#forecast/{d}")
+            hhmm = lambda m: f"{m // 60:02d}:{m % 60:02d}"  # noqa: E731
+            lines += ["BEGIN:VEVENT", f"UID:{d}-{start}@olparkcast", f"DTSTAMP:{stamp}",
+                      f"DTSTART:{_ics_time(d, start)}", f"DTEND:{_ics_time(d, end)}",
+                      "SUMMARY:" + _ics_esc(f"[{label}] 올림픽공원 {hhmm(start)}~{hhmm(end)} (최대 {ratio[seg].max() * 100:.0f}%)"
+                                            + (f" · {_short_title(big[0]['title'])}" if big else "")),
+                      "LOCATION:" + _ics_esc("올림픽공원 주차장(동2·남2·북2문), 서울 송파구 올림픽로 424"),
+                      "DESCRIPTION:" + _ics_esc("\n".join(desc)), f"URL:{SITE_URL}#forecast/{d}",
+                      "TRANSP:TRANSPARENT", "END:VEVENT"]
+            n_events += 1
+    lines.append("END:VCALENDAR")
+    (OUT / "risk-days.ics").write_text("\r\n".join(_ics_fold(x) for x in lines) + "\r\n", encoding="utf-8")
+    return n_events
+
+
 # ---------------------------------------------------------------- 메인
 
 def main() -> int:
@@ -496,7 +603,9 @@ def main() -> int:
     (OUT / "model.json").write_text(json.dumps(model, ensure_ascii=False, indent=1), encoding="utf-8")
     (OUT / "events.json").write_text(json.dumps({"generatedAt": generated, "byDate": by_date}, ensure_ascii=False, indent=1), encoding="utf-8")
     (OUT / "insights.json").write_text(json.dumps(insights, ensure_ascii=False), encoding="utf-8")
+    n_ics = write_risk_ics(model, by_date, today)
 
+    print("risk-days.ics events:", n_ics)
     print("curve params (lead, power, tail, extra):", params)
     print("event coef per 1000 seats:", coef_per_1000)
     print("floors:", {k: round(v) for k, v in floors.items()})

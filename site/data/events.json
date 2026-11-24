@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-24T17:23+09:00",
+ "generatedAt": "2026-11-25T00:06+09:00",
  "byDate": {
   "2026-09-26": [
    {
@@ -220,7 +220,7 @@
     "dur": 130,
     "cls": "C",
     "clsSrc": "자동",
-    "clsNote": "기본값(혼합형)",
+    "clsNote": "20~40대 혼합 관객(분류 사전)",
     "timeSrc": "공연정보",
     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5162"
    }
@@ -256,9 +256,9 @@
     "venue": "KSPO DOME",
     "start": 1080,
     "dur": 140,
-    "cls": "B",
+    "cls": "C",
     "clsSrc": "자동",
-    "clsNote": "팬덤·해외투어형 공연명",
+    "clsNote": "20~40대 혼합 관객(분류 사전)",
     "timeSrc": "공연정보",
     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5163"
    }
@@ -294,9 +294,9 @@
     "venue": "KSPO DOME",
     "start": 1020,
     "dur": 140,
-    "cls": "B",
+    "cls": "C",
     "clsSrc": "자동",
-    "clsNote": "팬덤·해외투어형 공연명",
+    "clsNote": "20~40대 혼합 관객(분류 사전)",
     "timeSrc": "공연정보",
     "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5163"
    }
@@ -3270,6 +3270,20 @@
    }
   ],
   "2027-04-18": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-24": [
    {
     "evtSeq": 5185,
     "title": "뮤지컬 〈폭풍우 치는 밤에〉",

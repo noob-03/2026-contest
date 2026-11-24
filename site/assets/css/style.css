@@ -320,3 +320,45 @@ legend { font-size: 13px; color: var(--muted); margin-bottom: 6px; padding: 0; }
 .loading { opacity: .5; transition: opacity .2s; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 @media print { .topbar, .footer, .date-strip { display: none; } .card { break-inside: avoid; } }
+
+/* ---- 버튼·도구 모음 ---- */
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--brand); background: var(--brand); color: var(--brand-ink); font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: none; }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { background: var(--surface-2); filter: none; }
+.btn svg { width: 16px; height: 16px; }
+.seg-sm span { padding: 6px 12px; font-size: 13px; }
+.plan-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+/* ---- 오프라인 안내·토스트 ---- */
+.net-banner { padding: 10px 14px; border-radius: 12px; background: var(--lv-normal-soft); color: var(--ink); font-size: 14px; border: 1px solid var(--line); }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 60; max-width: min(92vw, 420px); padding: 10px 16px; border-radius: 12px; background: var(--ink); color: var(--surface); font-size: 14px; box-shadow: 0 8px 24px rgba(16, 24, 40, .2); }
+
+/* ---- 캘린더 구독 ---- */
+.subscribe { display: grid; gap: 8px; }
+.subscribe .url { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.subscribe code { display: block; flex: 1 1 260px; min-width: 0; padding: 8px 10px; border-radius: 8px; background: var(--surface-2); font-size: 12.5px; overflow-x: auto; white-space: nowrap; }
+
+/* ---- 운영 리포트 ---- */
+.ops-table { margin-top: 12px; }
+.ops-table td { white-space: normal; vertical-align: top; }
+.ops-table td.nowrap { white-space: nowrap; }
+.ops-table .act { color: var(--ink-2); font-size: 12.5px; min-width: 220px; }
+.ops-table .evs { min-width: 200px; }
+.ops-table .evs div + div { margin-top: 2px; }
+@media print {
+  .toolbar, .subscribe, .net-banner, .toast, .tabs { display: none !important; }
+}
+@media (max-width: 640px) {
+  .ops-table { overflow: visible; }
+  .ops-table table, .ops-table tbody, .ops-table tr, .ops-table td { display: block; width: 100%; }
+  .ops-table thead { display: none; }
+  .ops-table tr { padding: 12px; margin-bottom: 10px; border-radius: 12px; background: var(--surface-2); }
+  .ops-table td { border: 0; padding: 3px 0; text-align: left; white-space: normal; min-width: 0; }
+  .ops-table td.num { text-align: left; }
+  .ops-table td::before { content: attr(data-label); display: block; font-size: 11.5px; color: var(--muted); }
+  .ops-table td.day::before { display: none; }
+  .ops-table td.day a { font-weight: 800; font-size: 15px; }
+  .ops-table .act, .ops-table .evs { min-width: 0; }
+}
