@@ -14,7 +14,10 @@
 | 실시간 보정 | 한국체육산업개발 실시간 주차현황 API 값으로 오늘 남은 시간대 예보를 다시 계산 |
 | 방문 플래너 | 공연 관람(자가용/대중교통)·산책·운동·아이와 함께 — 목적별 도착 권장 시각, 출입문·주차구역, 귀가 분산 경로 |
 | 공연 캘린더 | 공연 일정과 날짜별 예상 최대 혼잡도, 관객유형(자가용 집중형·대중교통 중심형·혼합형) |
+| 운영 리포트(기관용) | 향후 14·30·60일 혼잡 위험일, 혼잡 시간대, 수용 초과 예상 대수, 주요 공연, 권장 조치 — CSV·인쇄 |
+| 캘린더·공유 | 혼잡 예보 캘린더 구독(`data/risk-days.ics`, 매일 갱신), 플래너 일정 저장(.ics, 1시간 전 알림), 추천 동선 링크 공유 |
 | 데이터 인사이트 | 입출차 21만 건 분석 결과, 관객유형별 주차 영향, 계절 패턴, 먼저 차는 주차구역, 예보 정확도 검증 |
+| 오프라인 지원 | 서비스 워커로 공연장 주변 통신 혼잡 때도 마지막 예보 표시, 홈 화면 추가(PWA) |
 
 ## 활용한 공공데이터
 
@@ -38,7 +41,7 @@
 
 - 기본 패턴(평일/토/일·공휴일 × 48슬롯)과 관객유형 계수는 2024년 7월 입출차 기록으로 최소제곱 추정
 - 곡선 모양(도착 시작, 퇴장 소요)은 날짜 단위 교차검증(leave-one-day-out) 오차가 가장 작은 값 선택
-- 추정 결과: 좌석 1,000석당 공연 중 추가 점유 — 자가용 집중형 83대, 혼합형 50대, 대중교통 중심형 18대
+- 추정 결과: 좌석 1,000석당 공연 중 추가 점유 — 자가용 집중형 83대, 혼합형 50대, 대중교통 중심형 17대
 - 검증(30일, 07~23시): 평균 오차 57.9대(수용량의 2.6%) — 공연 미반영 기준선 99.2대 대비 42% 감소,
   대형 공연일 최대치 오차 100.7대(기준선 456대)
 
@@ -46,15 +49,15 @@
 
 ```
 site/                정적 웹 서비스(GitHub Pages 배포 대상)
-  index.html
+  index.html, sw.js  화면, 오프라인용 서비스 워커
   assets/js/         app.js(화면) · forecast.js(예보 엔진) · charts.js(SVG 그래프)
-  data/              파이프라인이 만든 model.json · events.json · insights.json
+  data/              파이프라인이 만든 model.json · events.json · insights.json · risk-days.ics
 pipeline/            데이터 수집·모델 학습
   fetch_datagokr.py  공공데이터포털 파일데이터 내려받기(UTF-8 변환)
   fetch_events.py    올림픽공원 공연정보 월별 수집
   event_parser.py    자유서식 공연시간 → 날짜별 시작시각
-  build_model.py     학습·검증·웹용 JSON 생성
-  audience_tags.json 공연별 관객유형 검수표
+  build_model.py     학습·검증·웹용 JSON·캘린더 피드 생성(관객유형 분류 사전 포함)
+  audience_tags.json 공연별 관객유형 검수표(사전보다 우선)
 data/raw/            내려받은 공공데이터(CSV)
 data/events/         공연정보(JSON)
 .github/workflows/   매일 자동 갱신·배포, 실시간 주차현황 기록
@@ -67,7 +70,8 @@ python -m venv .venv && . .venv/bin/activate
 pip install -r pipeline/requirements.txt
 python pipeline/fetch_datagokr.py      # 공공데이터 다시 받기(선택)
 python pipeline/fetch_events.py        # 공연정보 갱신
-python pipeline/build_model.py         # 학습·검증·site/data 생성
+python pipeline/build_model.py         # 학습·검증·site/data 생성(약 1~2분)
+OLPARK_FAST=1 python pipeline/build_model.py   # 곡선 탐색 생략(공연정보만 바뀐 경우, 수 초)
 python -m http.server 8000 --directory site   # http://localhost:8000
 ```
 
@@ -75,6 +79,8 @@ python -m http.server 8000 --directory site   # http://localhost:8000
 
 `.github/workflows/deploy.yml`이 기본 브랜치(main)에 반영된 변경과 매일 05:17(KST)에 공연정보를 갱신해
 GitHub Pages로 배포합니다.
+
+캘린더 피드의 링크 주소는 배포 주소를 따릅니다(워크플로가 `OLPARK_SITE_URL`로 자동 지정, 로컬 기본값은 GitHub Pages 주소).
 
 `.github/workflows/live-log.yml`은 30분마다 실시간 주차현황을 `live-data` 브랜치에 기록합니다(재학습용).
 

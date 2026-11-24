@@ -174,6 +174,13 @@ function rangesFrom(fc, minLevel, fromMin) {
   return STATE.fc.busyRanges(fc, minLevel).filter((b) => fromMin == null || b.end > fromMin);
 }
 
+/** 가장 한산한 2시간(07~21시). 남은 시간이 부족하면 1시간 단위로 24시까지 찾는다.
+ *  calm=false 이면 '한산'하다고 부를 수 없는(이용률 70% 이상) 구간이다. */
+function quietWindow(fc, fromMin, fromH = 7, toH = 21) {
+  const w = STATE.fc.bestWindow(fc, fromH, toH, 4, fromMin) || STATE.fc.bestWindow(fc, fromH, 24, 2, fromMin);
+  return w ? { ...w, calm: w.level === 'free' || w.level === 'normal' } : null;
+}
+
 // ---------------------------------------------------------------- 혼잡 예보
 function renderForecast() {
   const today = nowKST().ds;
@@ -221,7 +228,7 @@ function renderHero(fc, today) {
   }
   const when = fc.ds === today ? '오늘' : fc.ds === addDays(today, 1) ? '내일' : mdLabel(fc.ds);
   const fromMin = isToday ? Math.ceil(nowKST().min / 30) * 30 : null;
-  const best = STATE.fc.bestWindow(fc, 7, 21, 4, fromMin);
+  const best = quietWindow(fc, fromMin);
   const busy = rangesFrom(fc, 'busy', isToday ? nowKST().min : null);
   const top = h('div', { class: 'hero-top' },
     h('div', { class: `hero-icon ${pk.level}` }, levelIcon(pk.level, 44)),
@@ -230,7 +237,7 @@ function renderHero(fc, today) {
       h('h2', { class: 'hero-title' }, isToday ? '남은 시간 최대 ' : '최대 ', levelBadge(pk.level), ` ${fmtMin(pk.min)}쯤 ${pct(pk.ratio)}`)));
   const facts = h('dl', { class: 'hero-facts' },
     h('div', {}, h('dt', { text: '가장 붐비는 시간' }), h('dd', { text: fmtMin(pk.min) })),
-    h('div', {}, h('dt', { text: '한산한 시간' }), h('dd', { text: best ? `${fmtMin(best.start)}~${fmtMin(best.end)}` : '—' })),
+    h('div', {}, h('dt', { text: best && best.calm ? '한산한 시간' : '덜 붐비는 시간' }), h('dd', { text: best ? `${fmtMin(best.start)}~${fmtMin(best.end)}` : '—' })),
     h('div', {}, h('dt', { text: '혼잡 시간대' }), h('dd', { text: busy.length ? busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).slice(0, 2).join(', ') : '없음' })));
   const bigShows = fc.shows.filter((s) => s.peakCars >= 150).sort((a, b) => b.peakCars - a.peakCars);
   let note;
@@ -362,7 +369,7 @@ function renderTips(fc) {
   const tips = [];
   const now = nowKST();
   const fromMin = fc.ds === now.ds ? Math.ceil(now.min / 30) * 30 : null;
-  const best = STATE.fc.bestWindow(fc, 7, 21, 4, fromMin) || STATE.fc.bestWindow(fc, 7, 24, 2, fromMin);
+  const best = quietWindow(fc, fromMin);
   const busy = STATE.fc.busyRanges(fc, 'busy').filter((b) => fromMin == null || b.end > fromMin);
   const big = fc.shows.filter((s) => s.peakCars >= 300).sort((a, b) => b.peakCars - a.peakCars)[0];
   if (big) {
@@ -371,7 +378,8 @@ function renderTips(fc) {
     tips.push(['↗', `공연이 끝나는 ${fmtMin(end)} 무렵부터 30~60분은 출차·지하철이 붐벼요. 8호선은 몽촌토성역(1번 출구), 9호선은 한성백제역(2번 출구)을 이용하면 올림픽공원역 혼잡을 피할 수 있어요.`]);
   }
   if (busy.length) tips.push(['!', `${busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(', ')}에는 차량 방문을 피하세요(이용률 70% 이상 예상).`]);
-  if (best) tips.push(['☀', `산책·나들이는 ${fmtMin(best.start)}~${fmtMin(best.end)}가 가장 한산해요(평균 ${pct(best.avg / STATE.model.capacity)}).`]);
+  if (best && best.calm) tips.push(['☀', `산책·나들이는 ${fmtMin(best.start)}~${fmtMin(best.end)}가 가장 한산해요(평균 ${pct(best.avg / STATE.model.capacity)}).`]);
+  else if (best) tips.push(['☁', `남은 시간은 계속 붐벼요. 그나마 ${fmtMin(best.start)}~${fmtMin(best.end)}가 덜 붐벼요(평균 ${pct(best.avg / STATE.model.capacity)}).`]);
   const lots = Object.entries(STATE.model.lotFullShare).filter(([k]) => STATE.model.lots[k]).sort((a, b) => a[1] - b[1]).slice(0, 3).map(([k]) => `${k}(${STATE.model.lots[k].gate})`);
   tips.push(['P', `만차 기록이 적은 주차구역: ${lots.join(', ')} — 주차장 혼잡도 기록 분석 결과예요.`]);
   tips.push(['♿', '휠체어 이용 시 동2문으로 들어와 그래피티의 벽 주차장에 주차하면 올림픽공원역 방향 경사로로 만남의광장에 바로 갈 수 있어요.']);
@@ -543,10 +551,10 @@ function computePlan() {
   } else {
     const ranges = { walk: [7, 20], sports: [6, 22], kids: [9, 18] }[purpose];
     const nowMin = ds === nowKST().ds ? Math.ceil(nowKST().min / 30) * 30 : null;
-    const best = STATE.fc.bestWindow(fc, ranges[0], ranges[1], 4, nowMin);
+    const best = quietWindow(fc, nowMin, ranges[0], ranges[1]);
     const busy = rangesFrom(fc, 'normal', nowMin);
-    headline = best ? `${fmtMin(best.start)}~${fmtMin(best.end)}이 가장 한산해요` : '오늘 남은 시간은 모두 붐벼요';
-    sub = best ? `이 시간대 예상 이용률 평균 ${pct(best.avg / cap)} (${LEVEL_LABEL[best.level]})` : '';
+    headline = !best ? '오늘은 방문 가능한 시간이 지났어요' : best.calm ? `${fmtMin(best.start)}~${fmtMin(best.end)}이 가장 한산해요` : `${fmtMin(best.start)}~${fmtMin(best.end)}이 그나마 덜 붐벼요`;
+    sub = best ? `이 시간대 예상 이용률 평균 ${pct(best.avg / cap)} (${LEVEL_LABEL[best.level]})${best.calm ? '' : ' — 다른 날을 고려해 보세요'}` : '';
     if (busy.length) steps.push(['피하면 좋은 시간', `${busy.map((b) => `${fmtMin(b.start)}~${fmtMin(b.end)}`).join(', ')} (이용률 50% 이상 예상)`]);
     const subway = '8호선 몽촌토성역 1번 출구(세계평화의문·몽촌토성), 5·9호선 올림픽공원역 3·4번 출구(만남의광장·장미광장), 9호선 한성백제역 2번 출구(남4문·한성백제박물관)';
     if (purpose === 'walk') {
