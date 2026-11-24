@@ -3,8 +3,9 @@ import { forecastColumns, lineChart, hbarChart, sparkBars } from './charts.js';
 
 const LIVE_REFRESH_MS = 5 * 60 * 1000;
 const PARK = { lat: 37.5207, lon: 127.1214 };
-const STATE = { model: null, events: null, insights: null, fc: null, live: null, liveError: null, weather: null, date: null, calMonth: null, opsDays: 30 };
+const STATE = { model: null, events: null, insights: null, fc: null, live: null, liveError: null, weather: null, date: null, calMonth: null, opsDays: 30, view: null, routed: false };
 const PURPOSE_LABEL = { show: '공연 관람', walk: '산책·나들이', sports: '운동·수영', kids: '아이와 함께' };
+const VIEW_TITLE = { home: '올팍캐스트 · 올림픽공원 혼잡 예보', forecast: '혼잡 예보', plan: '방문 플래너', calendar: '공연 캘린더', ops: '운영 리포트', insights: '데이터 인사이트', about: '서비스 소개' };
 
 const $ = (sel) => document.querySelector(sel);
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -24,6 +25,12 @@ const h = (tag, attrs = {}, ...kids) => {
 const pct = (r) => `${Math.round(r * 100)}%`;
 const cars = (v) => `${Math.round(v).toLocaleString()}대`;
 const mdLabel = (ds) => { const d = parseYmd(ds); return `${d.getMonth() + 1}/${d.getDate()}(${DOW[d.getDay()]})`; };
+/** 목록용 짧은 공연명: 앞의 [서울]·연도, 끝의 ' - 서울' 을 뗀다 */
+const shortTitle = (t) => t.replace(/^\s*[[［(（<〈【][^\]］)）>〉】]{1,8}[\]］)）>〉】]\s*/, '').replace(/^\s*\d{4}\s+/, '')
+  .replace(/\s*[-–—]\s*(in\s+)?seoul\s*$|\s*[-–—]\s*서울\s*$/i, '').trim() || t;
+/** 짧은 시간 범위: 10:00~12:00 → 10~12시 (둘 다 정시일 때만 줄인다) */
+const rangeShort = (a, b) => (a % 60 === 0 && b % 60 === 0 ? `${a / 60}~${b / 60}시` : `${fmtMin(a)}~${fmtMin(b)}`);
+const currentTheme = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
 // ---------------------------------------------------------------- 혼잡 단계 아이콘(항상 글자와 함께 표시)
 const ICONS = {
@@ -125,19 +132,26 @@ function forecastFor(ds) {
 
 // ---------------------------------------------------------------- 라우팅
 function route() {
-  const [tab, ...args] = decodeURIComponent(location.hash.replace('#', '') || 'forecast').split('/');
+  const [tab, ...args] = decodeURIComponent(location.hash.replace('#', '')).split('/');
   const arg = args[0];
-  const views = ['forecast', 'plan', 'calendar', 'ops', 'insights', 'about'];
-  const cur = views.includes(tab) ? tab : 'forecast';
+  const cur = VIEW_TITLE[tab] ? tab : 'home';
+  const changed = STATE.view !== cur;
+  STATE.view = cur;
   document.querySelectorAll('.view').forEach((v) => { v.hidden = v.dataset.view !== cur; });
-  document.querySelectorAll('.tabs a').forEach((a) => {
-    if (a.dataset.tab === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  document.querySelectorAll('.gnb-nav a, .tabbar a, .menu-list a').forEach((a) => {
+    const t = a.dataset.tab || a.getAttribute('href').slice(1);
+    if (t === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
-  if (cur === 'forecast') {
+  document.title = cur === 'home' ? VIEW_TITLE.home : `${VIEW_TITLE[cur]} · 올팍캐스트`;
+  closeMenu(false);
+  if (changed && STATE.routed) window.scrollTo(0, 0); // 다른 화면으로 옮길 때만 맨 위로
+  STATE.routed = true;
+  if (cur === 'home') renderHome();
+  else if (cur === 'forecast') {
     if (arg && /^\d{4}-\d{2}-\d{2}$/.test(arg)) STATE.date = arg;
     renderForecast();
   } else if (cur === 'plan') renderPlan(args);
-  else if (cur === 'calendar') renderCalendar();
+  else if (cur === 'calendar') renderCalendar(args);
   else if (cur === 'ops') renderOps();
   else if (cur === 'insights') renderInsights();
   else if (cur === 'about') renderAbout();
@@ -181,6 +195,354 @@ function quietWindow(fc, fromMin, fromH = 7, toH = 21) {
   return w ? { ...w, calm: w.level === 'free' || w.level === 'normal' } : null;
 }
 
+/** 오늘은 지금 이후 남은 시간대 중 최대, 다른 날은 하루 최대 */
+function remainingPeak(fc, isToday, nowMin) {
+  if (!isToday) return fc.peak;
+  const nowSlot = Math.floor(nowMin / 30);
+  const rest = fc.slots.filter((s) => s.k >= nowSlot && s.min < 24 * 60);
+  return rest.length ? rest.reduce((a, s) => (s.final > a.final ? s : a), rest[0]) : fc.peak;
+}
+
+function levelLegendItems() {
+  const range = { free: '50% 미만', normal: '50~70%', busy: '70~90%', full: '90% 이상' };
+  return LEVEL_KEYS.map((lv) => {
+    const sw = h('span', { class: 'sw' });
+    sw.style.background = lvColor(lv);
+    return h('li', {}, sw, `${LEVEL_LABEL[lv]} ${range[lv]}`);
+  });
+}
+
+function slotTooltip(fc, isToday) {
+  return (s) => {
+    const past = isToday && s.min + 30 <= nowKST().min;
+    const rows = [{ title: `${mdLabel(fc.ds)} ${fmtMin(s.min)}~${fmtMin(s.min + 30)}${past ? ' (지난 시간)' : ''}` },
+      { label: `예상 ${LEVEL_LABEL[s.level]}`, value: `${pct(s.ratio)} · ${cars(s.final)}` },
+      { label: '평소 방문', value: cars(s.base) }];
+    if (s.event >= 5) rows.push({ label: '공연 영향', value: `+${cars(s.event)}` });
+    if (Math.abs(s.adj) >= 5) rows.push({ label: '실시간 보정', value: `${s.adj > 0 ? '+' : '−'}${cars(Math.abs(s.adj))}` });
+    if (s.rainP != null && s.rainP >= 0.3) rows.push({ label: '강수 가능성', value: pct(s.rainP) });
+    return rows;
+  };
+}
+
+// ---------------------------------------------------------------- 홈(첫 화면)
+const HERO_WORD = { free: '여유로워요', normal: '조금 붐벼요', busy: '붐벼요', full: '만차 위험' };
+const periodOf = (min) => (min < 12 * 60 ? '오전' : min < 14 * 60 ? '점심 무렵' : min < 18 * 60 ? '오후' : min < 21 * 60 ? '저녁' : '밤');
+
+/** 첫 화면이 보여 줄 날: 오늘, 밤 10시가 넘으면 내일 */
+function heroDay() {
+  const now = nowKST();
+  const late = now.min >= 22 * 60;
+  return { now, ds: late ? addDays(now.ds, 1) : now.ds, isToday: !late, when: late ? '내일' : '오늘' };
+}
+
+// 혼잡 단계별 하늘(낮/밤 화면 모드). 맑을수록 여유, 폭풍일수록 만차 위험.
+const SCENE = {
+  day: {
+    free: { top: '#4aa8f7', bot: '#e4f4ff', sun: '#ffc531', cloud: ['#ffffff', '#f2f7fd'], far: '#a8dcbb', near: ['#82cb9c', '#5fb381'], land: '#7c98c7', land2: '#6984b5', rib: '#a9bde2', tree: ['#3f9b64', '#58b47b'], trunk: '#7a5a3a', lot: '#d9e0ea', stall: '#ffffff' },
+    normal: { top: '#86bcef', bot: '#eef5fc', sun: '#ffcf4d', cloud: ['#ffffff', '#e7edf6'], far: '#b1d9be', near: ['#8bc7a0', '#6ab287'], land: '#889ec4', land2: '#7389b2', rib: '#b3c3e1', tree: ['#47a06b', '#60b582'], trunk: '#7a5a3a', lot: '#d9e0ea', stall: '#ffffff' },
+    busy: { top: '#8592ab', bot: '#dde2ea', cloud: ['#c3cad7', '#a9b2c3'], rain: '#6b7ca2', far: '#a2bcaa', near: ['#86aa94', '#6c937b'], land: '#75849e', land2: '#66748d', rib: '#98a6bf', tree: ['#5a8f6d', '#6e9f80'], trunk: '#6a5040', lot: '#cdd3dd', stall: '#eef1f5' },
+    full: { top: '#232a47', bot: '#59627f', cloud: ['#4a5370', '#3a425d'], rain: '#a9b8dc', bolt: '#ffd84a', far: '#45604f', near: ['#3a5444', '#2d4436'], land: '#323c58', land2: '#2a3350', rib: '#4a5680', tree: ['#2f5a41', '#386a4c'], trunk: '#3a2e28', lot: '#3a425a', stall: '#5d6683', dark: true },
+  },
+  night: {
+    free: { top: '#0a1538', bot: '#27397a', moon: '#f5efd2', cloud: ['#2f3f73', '#26355f'], far: '#1c3a37', near: ['#163128', '#10261f'], land: '#24315c', land2: '#1d2850', rib: '#34467e', tree: ['#14402c', '#1a4c35'], trunk: '#2a2320', lot: '#232c46', stall: '#3a4666', stars: 38, dark: true },
+    normal: { top: '#0f1a3d', bot: '#33416f', moon: '#f0ead0', cloud: ['#4a5680', '#3d4870'], far: '#1e3a37', near: ['#183229', '#112820'], land: '#27345f', land2: '#202b52', rib: '#384a82', tree: ['#16422e', '#1c4e37'], trunk: '#2a2320', lot: '#252e48', stall: '#3c4868', stars: 18, dark: true },
+    busy: { top: '#161b2e', bot: '#3a4157', cloud: ['#3d4459', '#4b5269'], rain: '#8b9cc6', far: '#1f3530', near: ['#1a2e26', '#13241e'], land: '#262f4a', land2: '#20283f', rib: '#36415f', tree: ['#1b3c2c', '#214634'], trunk: '#2a2320', lot: '#262c40', stall: '#3b4257', dark: true },
+    full: { top: '#0c0f1d', bot: '#2a2e44', cloud: ['#262b40', '#32384f'], rain: '#9aa9d0', bolt: '#ffe066', far: '#1a2c27', near: ['#16261f', '#101d18'], land: '#1f263d', land2: '#191f33', rib: '#2d3654', tree: ['#173325', '#1c3c2c'], trunk: '#241e1b', lot: '#20253a', stall: '#353b52', dark: true },
+  },
+};
+
+function seededRandom(seed) {
+  let s = seed >>> 0;
+  return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };
+}
+
+/** 올림픽공원 풍경(세계평화의문·KSPO DOME·주차장) — 고정 도형만 쓰는 장식용 SVG 문자열.
+ *  주차장에 선 차의 수가 예상 이용률을 나타낸다. */
+function skyScene(lv, night, ratio, bigShow) {
+  const P = SCENE[night ? 'night' : 'day'][lv];
+  const R = seededRandom(424);
+  const o = ['<svg viewBox="0 0 2400 760" preserveAspectRatio="xMaxYMax slice" xmlns="http://www.w3.org/2000/svg" focusable="false">',
+    `<defs><linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${P.top}"/><stop offset="1" stop-color="${P.bot}"/></linearGradient>`,
+    `<radialGradient id="glowG"><stop offset="0" stop-color="${P.sun || P.moon || '#ffd36b'}" stop-opacity=".55"/><stop offset="1" stop-color="${P.sun || P.moon || '#ffd36b'}" stop-opacity="0"/></radialGradient></defs>`,
+    '<rect width="2400" height="760" fill="url(#skyG)"/>'];
+  if (P.stars) {
+    o.push('<g fill="#ffffff">');
+    for (let i = 0; i < P.stars; i++) o.push(`<circle cx="${Math.round(380 + R() * 2000)}" cy="${Math.round(40 + R() * 360)}" r="${(0.8 + R() * 1.6).toFixed(1)}" opacity="${(0.35 + R() * 0.6).toFixed(2)}"/>`);
+    o.push('</g>');
+  }
+  if (P.sun) o.push(`<circle class="sunglow" cx="2300" cy="170" r="150" fill="url(#glowG)"/><circle cx="2300" cy="170" r="${lv === 'free' ? 66 : 58}" fill="${P.sun}"/>`);
+  if (P.moon) o.push(`<circle class="sunglow" cx="2300" cy="165" r="120" fill="url(#glowG)"/><circle cx="2300" cy="165" r="46" fill="${P.moon}"/><circle cx="2284" cy="151" r="8" fill="#000" opacity=".07"/><circle cx="2316" cy="179" r="11" fill="#000" opacity=".05"/>`);
+  const cloud = (x, y, s, fill, cls) => `<g class="cloud ${cls}"><g transform="translate(${x} ${y}) scale(${s})" fill="${fill}"><circle cx="40" cy="40" r="26"/><circle cx="80" cy="30" r="34"/><circle cx="118" cy="44" r="22"/><rect x="14" y="40" width="128" height="26" rx="13"/></g></g>`;
+  const clouds = {
+    free: [[1960, 300, 0.8, 0, 'c1'], [2120, 80, 0.6, 1, 'c2'], [1250, 34, 0.7, 1, 'c3']],
+    normal: [[1940, 255, 1.0, 0, 'c1'], [2190, 330, 0.8, 1, 'c2'], [2210, 120, 0.9, 0, 'c3'], [1300, 26, 0.8, 1, 'c1']],
+    busy: [[1900, 150, 1.5, 1, 'c1'], [2120, 56, 1.7, 0, 'c2'], [2180, 250, 1.3, 1, 'c3'], [1250, 16, 1.2, 0, 'c2'], [1640, 36, 1.0, 1, 'c3']],
+    full: [[1880, 110, 1.9, 1, 'c1'], [2120, 36, 2.1, 0, 'c2'], [2160, 232, 1.6, 1, 'c3'], [1200, 6, 1.5, 0, 'c2'], [1600, 16, 1.4, 1, 'c3']],
+  }[lv];
+  for (const [x, y, s, f, c] of clouds) o.push(cloud(x, y, s, P.cloud[f], c));
+  if (P.rain) {
+    o.push(`<g class="rain" stroke="${P.rain}" stroke-width="2.2" stroke-linecap="round" opacity="${lv === 'full' ? 0.75 : 0.55}">`);
+    for (let i = 0, n = lv === 'full' ? 64 : 34; i < n; i++) {
+      const x = Math.round(1900 + R() * 500);
+      const y = Math.round(250 + R() * 220);
+      o.push(`<line x1="${x}" y1="${y}" x2="${x - 6}" y2="${y + 20}"/>`);
+    }
+    o.push('</g>');
+  }
+  if (P.bolt) o.push(`<path class="bolt" d="M2040 262l-46 104h38l-30 92 84-128h-40l32-68z" fill="${P.bolt}"/>`);
+  if (lv === 'free' && !night) o.push('<g stroke="#2d3c5a" stroke-width="3" fill="none" stroke-linecap="round" opacity=".5"><path d="M2040 232q9-9 18 0q9-9 18 0"/><path d="M2100 204q7-7 14 0q7-7 14 0"/><path d="M1996 196q6-6 12 0q6-6 12 0"/></g>');
+  // 먼 언덕
+  o.push(`<path d="M0 540C300 500 560 500 820 530C1080 560 1300 575 1560 540C1800 508 2050 480 2400 505V760H0Z" fill="${P.far}"/>`);
+  for (const [x, y, r] of [[1230, 552, 12], [1262, 556, 15], [1296, 554, 11], [420, 520, 13], [452, 522, 10]]) o.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="${P.tree[1]}" opacity=".7"/>`);
+  // 대형 공연이 있는 날: 어두운 하늘엔 서치라이트, 밝은 하늘엔 깃발
+  if (bigShow && P.dark) o.push('<g class="beams" fill="#ffe7a3" opacity=".1"><path d="M2150 480 1990 40h70z"/><path d="M2220 480 2380 60h-70z"/></g>');
+  // 나홀로나무 언덕(올림픽공원의 상징 같은 풍경)
+  o.push(`<path d="M1580 600C1650 552 1730 532 1810 530C1890 532 1970 552 2040 600Z" fill="${P.near[0]}"/>`
+    + `<path d="M1803 534 1806 470h8l3 64z" fill="${P.trunk}"/>`
+    + `<g fill="${P.tree[0]}"><circle cx="1810" cy="452" r="44"/><circle cx="1770" cy="470" r="30"/><circle cx="1850" cy="470" r="32"/><circle cx="1788" cy="428" r="30"/><circle cx="1834" cy="430" r="30"/></g>`
+    + `<circle cx="1796" cy="436" r="17" fill="${P.tree[1]}" opacity=".8"/>`);
+  // KSPO DOME
+  o.push(`<rect x="2020" y="548" width="330" height="16" rx="5" fill="${P.land2}"/><path d="M2035 552C2060 462 2310 462 2335 552Z" fill="${P.land}"/>`
+    + `<path d="M2185 487V552M2110 497C2117 515 2122 533 2124 552M2260 497C2253 515 2248 533 2246 552M2070 516C2080 528 2085 540 2088 552M2300 516C2290 528 2285 540 2282 552M2042 538H2328" stroke="${P.rib}" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+  if (bigShow && !P.dark) {
+    o.push('<path d="M2060 500Q2185 452 2310 500" stroke="#8a94a8" stroke-width="1.5" fill="none"/>');
+    const flags = ['#ff6a1a', '#ffb21e', '#1f3bd6', '#17935a', '#d03b3b', '#ffffff'];
+    for (let i = 0; i < 11; i++) {
+      const t = (i + 0.5) / 11;
+      const x = 2060 + 250 * t;
+      const y = (1 - t) ** 2 * 500 + 2 * (1 - t) * t * 452 + t * t * 500;
+      o.push(`<path d="M${(x - 7).toFixed(1)} ${y.toFixed(1)}h14l-7 13z" fill="${flags[i % flags.length]}"/>`);
+    }
+  }
+  // 가까운 언덕
+  o.push(`<path d="M0 610C320 570 600 580 900 606C1200 632 1500 650 1800 612C2000 586 2200 570 2400 585V760H0Z" fill="${P.near[0]}"/>`);
+  o.push(`<path d="M0 672C380 636 720 646 1040 668C1360 690 1760 706 2100 670C2240 656 2330 648 2400 652V760H0Z" fill="${P.near[1]}"/>`);
+  for (const [x, base, r, c] of [[140, 600, 26, 0], [200, 596, 18, 1], [330, 590, 30, 0], [700, 594, 22, 1], [760, 598, 28, 0], [1120, 622, 24, 0], [1170, 624, 16, 1], [1420, 632, 26, 0], [1484, 632, 18, 1]]) {
+    o.push(`<rect x="${x - 4}" y="${base - r}" width="8" height="${r}" fill="${P.trunk}"/><circle cx="${x}" cy="${base - r * 1.25}" r="${r}" fill="${P.tree[c]}"/>`);
+  }
+  // 주차장(동2·남2·북2문을 한데 그린 그림) — 24칸 중 이용률만큼 차가 선다
+  o.push(`<rect x="2005" y="582" width="4" height="24" fill="#8a94a8"/><rect x="1996" y="560" width="22" height="22" rx="5" fill="#1f3bd6"/><path d="M2003 576v-11h5a3.4 3.4 0 0 1 0 6.8h-5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linejoin="round"/>`);
+  o.push(`<rect x="2010" y="600" width="376" height="62" rx="12" fill="${P.lot}"/><path d="M2018 631H2378" stroke="${P.stall}" stroke-width="2" stroke-dasharray="10 8"/>`);
+  o.push(`<g stroke="${P.stall}" stroke-width="2">`);
+  for (let i = 0; i <= 12; i++) { const x = 2016 + i * 30; o.push(`<path d="M${x} 606v20M${x} 636v20"/>`); }
+  o.push('</g>');
+  const order = Array.from({ length: 24 }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+  const carColors = ['#ff6a1a', '#ffffff', '#1f3bd6', '#2b303b', '#ffb21e', '#d7dce4', '#17935a', '#d03b3b', '#7a8599'];
+  const nCars = Math.max(1, Math.min(24, Math.round(ratio * 24)));
+  for (const idx of order.slice(0, nCars)) {
+    const x = 2016 + (idx % 12) * 30 + 4;
+    const y = idx < 12 ? 608 : 638;
+    o.push(`<rect x="${x}" y="${y}" width="22" height="16" rx="5" fill="${carColors[Math.floor(R() * carColors.length)]}"/><rect x="${x + 4}" y="${y + 3}" width="14" height="5" rx="2" fill="#0b1220" opacity=".25"/>`);
+  }
+  o.push('</svg>');
+  return o.join('');
+}
+
+function renderHome() {
+  const { now, ds, isToday, when } = heroDay();
+  const fc = forecastFor(ds);
+  const pk = remainingPeak(fc, isToday, now.min);
+  const best = quietWindow(fc, isToday ? Math.ceil(now.min / 30) * 30 : null);
+  const big = fc.shows.filter((s) => s.peakCars >= 150 && (!isToday || s.start + s.dur + 60 > now.min)).sort((a, b) => b.peakCars - a.peakCars)[0];
+  renderHomeHero({ fc, pk, best, now, isToday, when, big });
+  fillQuickPlan(ds);
+  renderHomeChart(fc, isToday, when);
+  renderHomeWeek(now.ds);
+  renderHomeShows(now.ds, now.min);
+  renderHomeStory();
+}
+
+function renderHomeHero({ fc, pk, best, now, isToday, when, big }) {
+  const cap = STATE.model.capacity;
+  const lv = pk.level;
+  const night = currentTheme() === 'dark';
+  const P = SCENE[night ? 'night' : 'day'][lv];
+  const hero = $('#homeHero');
+  hero.classList.toggle('dark', !!P.dark);
+  hero.classList.toggle('day', !P.dark);
+  hero.style.background = P.bot;
+  hero.style.setProperty('--scrim', P.top);
+  $('#heroScene').innerHTML = skyScene(lv, night, pk.ratio, !!big && big.peakCars >= 300); // 고정 도형만 포함(외부 문자열 없음)
+  const d = parseYmd(fc.ds);
+  $('#heroEyebrow').textContent = `${d.getMonth() + 1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일 · 올림픽공원 혼잡 예보`;
+  const word = h('span', { class: 'lv-word', text: HERO_WORD[lv] });
+  word.style.setProperty('--lv-color', lvColor(lv));
+  const pre = lv === 'free' ? (isToday && now.min >= 9 * 60 ? '남은 시간 ' : '종일 ') : `${periodOf(pk.min)}에 `;
+  $('#h-home').replaceChildren(`${when} 올림픽공원은`, h('br'), pre, word);
+
+  const reach = pk.ratio >= 1 ? `수용 한계를 넘을(${pct(pk.ratio)})` : `이용률 ${pct(pk.ratio)}까지 오를`;
+  let lead;
+  if (big && lv !== 'free') lead = `${big.venue} ‘${shortTitle(big.title)}’(${fmtMin(big.start)}) 영향으로 ${fmtMin(pk.min)}쯤 주차장이 ${reach} 전망이에요.`;
+  else if (big) lead = `${big.venue} ‘${shortTitle(big.title)}’(${fmtMin(big.start)}) 공연이 있지만 주차장은 여유로울 전망이에요.`;
+  else if (lv === 'free') lead = `큰 공연이 없는 날이에요. 가장 붐비는 ${fmtMin(pk.min)}에도 주차장 이용률은 ${pct(pk.ratio)} 정도예요.`;
+  else lead = `큰 공연은 없지만 ${fmtMin(pk.min)}쯤 주차장이 ${reach} 전망이에요.`;
+  if (big && big.cls === 'A' && lv !== 'free') lead += ' 대중교통을 권해요.';
+  if (isToday && fc.nowcast && Math.abs(fc.nowcast.delta) >= 150) {
+    const dd = Math.round(fc.nowcast.delta);
+    lead = `지금 평소보다 ${cars(Math.abs(dd))} ${dd > 0 ? '더' : '덜'} 차 있어요(실시간 반영). ${lead}`;
+  }
+  const w = STATE.weather?.daily?.[fc.ds];
+  if (w && w.pmax >= 0.6) lead += ` 비 소식(강수확률 ${pct(w.pmax)})이 있어 나들이 수요를 낮춰 계산했어요.`;
+  $('#heroLead').textContent = lead;
+
+  const stats = [];
+  if (STATE.live) stats.push(['지금 주차', STATE.live.value.toLocaleString(), `대 · ${pct(STATE.live.value / cap)}`]);
+  else {
+    const s = forecastFor(now.ds).slots[Math.min(47, Math.floor(now.min / 30))];
+    stats.push(['지금 예상', Math.round(s.final).toLocaleString(), `대 · ${pct(s.ratio)}`]);
+  }
+  stats.push([isToday ? '가장 붐비는 시간' : '내일 가장 붐빌 때', fmtMin(pk.min), pct(pk.ratio)]);
+  const avoid = rangesFrom(fc, 'busy', isToday ? now.min : null)[0];
+  if ((lv === 'busy' || lv === 'full') && avoid) {
+    const from = isToday ? Math.max(avoid.start, Math.floor(now.min / 30) * 30) : avoid.start;
+    stats.push(['피하면 좋은 시간', rangeShort(from, avoid.end), `최대 ${pct(avoid.peak / cap)}`]);
+  } else stats.push([best && best.calm ? '한산한 시간' : '덜 붐비는 시간', best ? rangeShort(best.start, best.end) : '—', best ? `평균 ${pct(best.avg / cap)}` : '']);
+  $('#heroStats').replaceChildren(...stats.map(([k, v, s]) => h('li', {}, h('span', { class: 'k', text: k }), h('span', { class: 'v' }, v, s ? h('small', { text: s }) : null))));
+}
+
+function setupQuickPlan() {
+  const form = $('#quickPlan');
+  form.addEventListener('change', (e) => { if (e.target.id === 'qpDate') fillQpShows(); syncQuickPlan(); });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const purpose = $('#qpPurpose').value;
+    const parts = ['plan', $('#qpDate').value, purpose, 'car'];
+    if (purpose === 'show' && $('#qpShow').value) parts.push($('#qpShow').value);
+    location.hash = parts.join('/');
+  });
+}
+
+function fillQuickPlan(defaultDs) {
+  const sel = $('#qpDate');
+  if (sel.options.length) return; // 처음 한 번만(사용자가 고른 값 유지)
+  const today = nowKST().ds;
+  for (let i = 0; i < 30; i++) {
+    const ds = addDays(today, i);
+    const n = new Set(STATE.fc.showsOn(ds).map((s) => s.evtSeq)).size;
+    sel.append(h('option', { value: ds, text: `${mdLabel(ds)}${i === 0 ? ' 오늘' : i === 1 ? ' 내일' : ''}${n ? ` · 공연 ${n}건` : ''}` }));
+  }
+  sel.value = defaultDs;
+  fillQpShows();
+  if (!$('#qpShow').value) $('#qpPurpose').value = 'walk';
+  syncQuickPlan();
+}
+
+function fillQpShows() {
+  const sel = $('#qpShow');
+  sel.replaceChildren();
+  const shows = STATE.fc.showsOn($('#qpDate').value).sort((a, b) => b.peakCars - a.peakCars || a.start - b.start);
+  if (!shows.length) sel.append(h('option', { value: '', text: '이날은 공연이 없어요' }));
+  for (const s of shows) sel.append(h('option', { value: `${s.evtSeq}-${s.start}`, text: `${fmtMin(s.start)} ${s.venue} · ${shortTitle(s.title)}` }));
+}
+
+function syncQuickPlan() {
+  const show = $('#qpPurpose').value === 'show';
+  $('#qpShowField').hidden = !show;
+  $('#quickPlan').classList.toggle('no-show', !show);
+}
+
+function renderHomeChart(fc, isToday, when) {
+  const cap = STATE.model.capacity;
+  $('#h-today').replaceChildren(`${when}, `, h('em', { text: '몇 시' }), '가 붐빌까요?');
+  $('#homeChartSub').textContent = `${mdLabel(fc.ds)} · 동2·남2·북2문 주차장(${cap.toLocaleString()}면) 예상 이용률 · 30분 단위${isToday && fc.nowcast ? ' · 실시간 보정 반영' : ''}`;
+  $('#homeLegend').replaceChildren(...levelLegendItems());
+  $('#homeMore').href = `#forecast/${fc.ds}`;
+  forecastColumns($('#homeChart'), {
+    slots: fc.slots, cap, from: 6, to: 24, nowMin: isToday ? nowKST().min : null, colorOf: (s) => lvColor(s.level), tooltip: slotTooltip(fc, isToday),
+    ariaLabel: `${mdLabel(fc.ds)} 시간대별 주차장 예상 이용률. 최대 ${fmtMin(fc.peak.min)} ${pct(fc.peak.ratio)}. 자세한 값은 혼잡 예보 화면의 표로 보기에서 확인할 수 있습니다.`,
+  });
+}
+
+function renderHomeWeek(today) {
+  const box = $('#homeWeek');
+  box.replaceChildren();
+  for (let i = 0; i < 7; i++) {
+    const ds = addDays(today, i);
+    const fc = forecastFor(ds);
+    const d = parseYmd(ds);
+    const pk = i === 0 ? remainingPeak(fc, true, nowKST().min) : fc.peak;
+    const weekend = d.getDay() === 0 || d.getDay() === 6 || STATE.fc.isHoliday(ds);
+    const top = [...fc.shows].sort((a, b) => b.peakCars - a.peakCars)[0];
+    const ev = top && top.peakCars >= 60 ? shortTitle(top.title) : '';
+    box.append(h('a', {
+      class: `week-card${i === 0 ? ' today' : ''}`, href: `#forecast/${ds}`,
+      'aria-label': `${mdLabel(ds)} ${i === 0 ? '남은 시간 ' : ''}최대 ${LEVEL_LABEL[pk.level]}, ${fmtMin(pk.min)} ${pct(pk.ratio)}${ev ? `, ${ev}` : ''}`,
+    },
+    h('span', { class: `wd${weekend ? ' weekend' : ''}`, text: i === 0 ? '오늘' : i === 1 ? '내일' : `${DOW[d.getDay()]}요일` }),
+    h('span', { class: 'dt', text: `${d.getMonth() + 1}.${d.getDate()}` }),
+    h('span', { class: 'ic' }, levelIcon(pk.level, 54)),
+    h('span', { class: 'lvname', text: LEVEL_LABEL[pk.level] }),
+    h('span', { class: 'pk', text: `최대 ${pct(pk.ratio)} · ${fmtMin(pk.min)}` }),
+    h('span', { class: 'evname', text: ev || '대형 공연 없음' })));
+  }
+}
+
+function renderHomeShows(today, nowMin) {
+  const list = $('#homeShows');
+  list.replaceChildren();
+  const rows = [];
+  const seen = new Set(); // 같은 공연은 가장 가까운 날 한 줄만
+  for (let i = 0; i < 60 && rows.length < 6; i++) {
+    const ds = addDays(today, i);
+    for (const s of STATE.fc.showsOn(ds).sort((a, b) => a.start - b.start)) {
+      if (rows.length >= 6) break;
+      if (seen.has(s.evtSeq) || s.peakCars < 60 || (ds === today && s.start + s.dur < nowMin)) continue;
+      seen.add(s.evtSeq);
+      rows.push({ ds, s });
+    }
+  }
+  if (!rows.length) {
+    list.append(h('li', { class: 'empty', text: '앞으로 60일 동안 주차에 영향이 큰 공연이 없어요.' }));
+    return;
+  }
+  const maxCars = Math.max(...rows.map((r) => r.s.peakCars));
+  const peakOf = new Map();
+  for (const { ds, s } of rows) {
+    if (!peakOf.has(ds)) peakOf.set(ds, forecastFor(ds).peak);
+    const pk = peakOf.get(ds);
+    const d = parseYmd(ds);
+    const bar = h('i');
+    bar.style.width = `${Math.max(4, (s.peakCars / maxCars) * 100)}%`;
+    bar.style.background = 'var(--brand)';
+    list.append(h('li', {}, h('a', { class: 'show-row', href: `#plan/${ds}/show/car/${s.evtSeq}-${s.start}`, title: `${s.title} — 추천 동선 보기` },
+      h('span', { class: 'when' }, h('b', { text: `${d.getMonth() + 1}.${pad(d.getDate())}` }), h('span', { text: `${DOW[d.getDay()]}요일 · ${fmtMin(s.start)}` })),
+      h('span', { class: 'what' }, h('span', { class: 'meta' }, h('span', { text: s.venueInfo.label }), clsBadge(s.cls), runLabel(s.evtSeq, ds)), h('strong', { text: shortTitle(s.title) })),
+      h('span', { class: 'impact' }, h('span', { class: 'bar', 'aria-hidden': 'true' }, bar),
+        h('span', {}, '주차 수요 최대 ', h('b', { text: `+${cars(s.peakCars)}` }), h('span', { class: `badge ${pk.level}` }, levelIcon(pk.level, 14), `이날 ${LEVEL_LABEL[pk.level]}`))),
+      h('span', { class: 'go', 'aria-hidden': 'true', text: '→' }))));
+  }
+}
+
+/** 여러 날 하는 공연: 4일 이하면 'N일 공연', 길면 마지막 날짜 */
+function runLabel(evtSeq, fromDs) {
+  const dates = Object.keys(STATE.events.byDate).filter((d) => d >= fromDs && STATE.events.byDate[d].some((s) => s.evtSeq === evtSeq)).sort();
+  if (dates.length < 2) return null;
+  const last = parseYmd(dates[dates.length - 1]);
+  return h('span', { text: dates.length <= 4 ? `${dates.length}일 공연` : `${last.getMonth() + 1}.${pad(last.getDate())}까지` });
+}
+
+function renderHomeStory() {
+  const md = STATE.model;
+  const bt = md.backtest;
+  const seats = 15; // KSPO DOME 15,000석
+  const [a, b, c] = ['A', 'B', 'C'].map((k) => Math.round(md.eventCoef[k] * seats));
+  $('#storyLead').textContent = `똑같이 KSPO DOME 1만 5천 석을 채운 공연이라도, 중장년 팬이 많은 공연은 10~20대 팬덤 공연보다 주차 수요가 ${(a / b).toFixed(1)}배 커요. 올팍캐스트는 실제 입출차 기록으로 이 차이를 학습해 예보합니다.`;
+  const bars = h('div', { class: 'story-bars', role: 'img', 'aria-label': `KSPO DOME 공연 1회 추가 주차 수요: 자가용 집중형 ${a}대, 혼합형 ${c}대, 대중교통 중심형 ${b}대` },
+    [['자가용 집중형', a], ['혼합형', c], ['대중교통 중심형', b]].map(([n, v], i) => {
+      const bar = h('i', { class: i ? 'b' : null });
+      bar.style.width = `${(v / a) * 100}%`;
+      return h('div', { 'aria-hidden': 'true' }, h('span', { text: n }), h('span', {}, bar), h('b', { text: `+${v.toLocaleString()}` }));
+    }));
+  $('#homeStory').replaceChildren(
+    h('div', {}, h('span', { class: 'k', text: '분석한 입출차 기록' }), h('span', { class: 'v' }, STATE.insights.records.toLocaleString(), h('small', { text: '건' })),
+      h('span', { class: 'd', text: '2024년 7월 올림픽공원 입출차 정보로 30분 단위 주차장 점유를 복원했어요.' })),
+    h('div', {}, h('span', { class: 'k', text: 'KSPO DOME 공연 1회가 더하는 주차' }), h('span', { class: 'v' }, `+${a.toLocaleString()}`, h('small', { text: '대' })), bars),
+    h('div', {}, h('span', { class: 'k', text: '예보 평균 오차' }), h('span', { class: 'v' }, bt.model_all.mae_pct_capacity.toFixed(1), h('small', { text: '%' })),
+      h('span', { class: 'd', text: `수용량 대비 · 공연을 반영하지 않은 기준선보다 오차 ${Math.round((1 - bt.model_all.mae_cars / bt.baseline_all.mae_cars) * 100)}% 감소(${bt.model_all.days}일 교차검증)` })));
+}
+
 // ---------------------------------------------------------------- 혼잡 예보
 function renderForecast() {
   const today = nowKST().ds;
@@ -219,13 +581,8 @@ function renderDateStrip(today, sel) {
 function renderHero(fc, today) {
   const card = $('#heroCard');
   card.replaceChildren();
-  let pk = fc.peak;
   const isToday = fc.ds === today;
-  if (isToday) { // 오늘은 지금 이후 남은 시간대 중 최대
-    const nowSlot = Math.floor(nowKST().min / 30);
-    const rest = fc.slots.filter((s) => s.k >= nowSlot && s.min < 24 * 60);
-    if (rest.length) pk = rest.reduce((a, s) => (s.final > a.final ? s : a), rest[0]);
-  }
+  const pk = remainingPeak(fc, isToday, nowKST().min);
   const when = fc.ds === today ? '오늘' : fc.ds === addDays(today, 1) ? '내일' : mdLabel(fc.ds);
   const fromMin = isToday ? Math.ceil(nowKST().min / 30) * 30 : null;
   const best = quietWindow(fc, fromMin);
@@ -264,7 +621,7 @@ function renderLive(fc, today) {
   const cap = STATE.model.capacity;
   const head = h('div', { class: 'live-head' },
     h('h2', { class: 'card-title' }, h('span', { class: `live-dot${STATE.live ? '' : ' off'}` }), '지금 주차 현황'),
-    h('button', { class: 'icon-btn', type: 'button', 'aria-label': '실시간 정보 새로고침', title: '새로고침', onclick: async () => { await fetchLive(); renderForecast(); updateFreshness(); } }, '↻'));
+    h('button', { class: 'icon-btn', type: 'button', 'aria-label': '실시간 정보 새로고침', title: '새로고침', onclick: async () => { await fetchLive(); renderForecast(); updateLivePill(); } }, '↻'));
   card.append(head);
   if (!STATE.live) {
     card.append(h('p', { class: 'card-sub', text: `실시간 주차현황을 불러오지 못했어요${STATE.liveError ? ` (${STATE.liveError})` : ''}. 예보는 과거 데이터로 계산한 값입니다.` }));
@@ -300,26 +657,10 @@ function renderForecastChart(fc, today) {
   const isToday = fc.ds === today;
   $('#chartTitle').textContent = `${isToday ? '오늘' : mdLabel(fc.ds)} 시간대별 혼잡 예보`;
   $('#chartSub').textContent = `동2·남2·북2문 주차장(${STATE.model.capacity.toLocaleString()}면) 예상 이용률 · 30분 단위${isToday && fc.nowcast ? ' · 실시간 보정 반영' : ''}`;
-  const legend = $('#levelLegend');
-  legend.replaceChildren(...LEVEL_KEYS.map((lv) => {
-    const sw = h('span', { class: 'sw' });
-    sw.style.background = lvColor(lv);
-    const range = { free: '50% 미만', normal: '50~70%', busy: '70~90%', full: '90% 이상' }[lv];
-    return h('li', {}, sw, `${LEVEL_LABEL[lv]} ${range}`);
-  }));
-  const tooltip = (s) => {
-    const past = isToday && s.min + 30 <= nowKST().min;
-    const rows = [{ title: `${mdLabel(fc.ds)} ${fmtMin(s.min)}~${fmtMin(s.min + 30)}${past ? ' (지난 시간)' : ''}` },
-      { label: `예상 ${LEVEL_LABEL[s.level]}`, value: `${pct(s.ratio)} · ${cars(s.final)}` },
-      { label: '평소 방문', value: cars(s.base) }];
-    if (s.event >= 5) rows.push({ label: '공연 영향', value: `+${cars(s.event)}` });
-    if (Math.abs(s.adj) >= 5) rows.push({ label: '실시간 보정', value: `${s.adj > 0 ? '+' : '−'}${cars(Math.abs(s.adj))}` });
-    if (s.rainP != null && s.rainP >= 0.3) rows.push({ label: '강수 가능성', value: pct(s.rainP) });
-    return rows;
-  };
+  $('#levelLegend').replaceChildren(...levelLegendItems());
   forecastColumns($('#forecastChart'), {
     slots: fc.slots, cap: STATE.model.capacity, from: 6, to: 24,
-    nowMin: isToday ? nowKST().min : null, colorOf: (s) => lvColor(s.level), tooltip,
+    nowMin: isToday ? nowKST().min : null, colorOf: (s) => lvColor(s.level), tooltip: slotTooltip(fc, isToday),
     ariaLabel: `${mdLabel(fc.ds)} 시간대별 주차장 예상 이용률. 최대 ${fmtMin(fc.peak.min)} ${pct(fc.peak.ratio)}. 표로 보기에서 전체 값을 확인할 수 있습니다.`,
   });
   const rows = fc.slots.filter((s) => s.min >= 360).map((s) => h('tr', {},
@@ -615,7 +956,7 @@ function computePlan() {
 }
 
 // ---------------------------------------------------------------- 공연 캘린더
-function renderCalendar() {
+function renderCalendar(args = []) {
   const today = nowKST().ds;
   if (!STATE.calMonth) STATE.calMonth = today.slice(0, 7);
   const [y, m] = STATE.calMonth.split('-').map(Number);
@@ -653,7 +994,17 @@ function renderCalendar() {
     sw.style.cssText = `display:inline-block;width:10px;height:10px;border-radius:3px;background:${clsColor[c]};margin-right:6px`;
     return h('span', {}, sw, h('b', { text: `${STATE.model.classes[c].name} ` }), STATE.model.classes[c].desc);
   }), h('span', { class: 'muted', text: '날씨 아이콘 = 그날 예상 최대 혼잡 단계' }));
-  renderSubscribe($('#calSubscribe'));
+  const sub = $('#calSubscribe');
+  renderSubscribe(sub);
+  if (args[0] === 'subscribe') { // 첫 화면 '혼잡 예보 구독' 바로가기
+    history.replaceState(null, '', '#calendar');
+    requestAnimationFrame(() => {
+      sub.scrollIntoView({ block: 'center' });
+      sub.classList.remove('flash');
+      void sub.offsetWidth;
+      sub.classList.add('flash');
+    });
+  }
 }
 
 // ---------------------------------------------------------------- 만차 위험일 캘린더 구독(파이프라인이 매일 만드는 data/risk-days.ics)
@@ -841,20 +1192,118 @@ function renderAbout() {
 }
 
 // ---------------------------------------------------------------- 공통
-function updateFreshness() {
-  const f = $('#freshness');
-  const live = STATE.live ? `실시간 ${STATE.live.at.getHours()}:${String(STATE.live.at.getMinutes()).padStart(2, '0')}` : '실시간 연결 안 됨';
-  f.textContent = `공연정보 ${STATE.events.generatedAt.slice(5, 10).replace('-', '/')} · ${live}`;
+/** 상단 바의 실시간 주차 표시 */
+function updateLivePill() {
+  const pill = $('#livePill');
+  const dot = pill.querySelector('.live-dot');
+  const val = pill.querySelector('.lp-val');
+  const cap = STATE.model.capacity;
+  let label;
+  if (STATE.live) {
+    const r = STATE.live.value / cap;
+    const lv = levelOf(r);
+    const t = STATE.live.at;
+    dot.classList.remove('off');
+    dot.style.setProperty('--dot', lvColor(lv));
+    val.textContent = `${STATE.live.value.toLocaleString()}대`;
+    label = `실시간 주차 ${STATE.live.value.toLocaleString()}대 / ${cap.toLocaleString()}대 (이용률 ${pct(r)}, ${LEVEL_LABEL[lv]}) · ${t.getHours()}:${pad(t.getMinutes())} 갱신`;
+  } else {
+    dot.classList.add('off');
+    dot.style.removeProperty('--dot');
+    val.textContent = '연결 안 됨';
+    label = '실시간 주차현황을 불러오지 못했어요. 예보는 과거 데이터로 계산합니다.';
+  }
+  pill.title = label;
+  pill.setAttribute('aria-label', label);
+  $('#dataStamp').textContent = ` · 공연정보 ${STATE.events.generatedAt.slice(0, 10)} 갱신`;
+}
+
+const THEME_ICON = {
+  dark: '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.5 5.5l1.5 1.5M17 17l1.5 1.5M5.5 18.5 7 17M17 7l1.5-1.5"/>',
+  light: '<path d="M20 14.6A8.3 8.3 0 0 1 9.4 4a8.3 8.3 0 1 0 10.6 10.6Z"/>',
+};
+function syncThemeIcon() {
+  const t = currentTheme();
+  const b = $('#themeBtn');
+  b.querySelector('svg').innerHTML = THEME_ICON[t];
+  const label = t === 'dark' ? '밝은 화면으로 전환' : '어두운 화면으로 전환';
+  b.setAttribute('aria-label', label);
+  b.title = label;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', t === 'dark' ? '#0b0e16' : '#ffffff');
 }
 
 function setupTheme() {
+  syncThemeIcon();
   $('#themeBtn').addEventListener('click', () => {
-    const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    const next = cur === 'dark' ? 'light' : 'dark';
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('olpark-theme', next); } catch (e) { /* 저장 불가 */ }
+    syncThemeIcon();
     route();
   });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
+    if (document.documentElement.dataset.theme) return;
+    syncThemeIcon();
+    route();
+  });
+}
+
+// ---------------------------------------------------------------- 전체 메뉴·상단 바·나타나기 효과
+let menuOpener = null;
+function openMenu(opener) {
+  const sheet = $('#menuSheet');
+  menuOpener = opener;
+  sheet.hidden = false;
+  document.body.style.overflow = 'hidden';
+  ['#menuBtn', '#tabMenu'].forEach((id) => $(id).setAttribute('aria-expanded', 'true'));
+  (sheet.querySelector('.menu-list a[aria-current]') || sheet.querySelector('.menu-list a')).focus();
+}
+function closeMenu(restoreFocus) {
+  const sheet = $('#menuSheet');
+  if (!sheet || sheet.hidden) return;
+  sheet.hidden = true;
+  document.body.style.overflow = '';
+  ['#menuBtn', '#tabMenu'].forEach((id) => $(id).setAttribute('aria-expanded', 'false'));
+  if (restoreFocus && menuOpener) menuOpener.focus();
+}
+
+let revealObserver = null;
+function observeReveal() {
+  const els = document.querySelectorAll('.reveal:not(.in)');
+  if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
+  revealObserver = revealObserver || new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      en.target.classList.add('in');
+      revealObserver.unobserve(en.target);
+    }
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+  els.forEach((e) => revealObserver.observe(e));
+}
+
+function setupChrome() {
+  const sheet = $('#menuSheet');
+  $('#menuBtn').addEventListener('click', (e) => openMenu(e.currentTarget));
+  $('#tabMenu').addEventListener('click', (e) => openMenu(e.currentTarget));
+  $('#menuClose').addEventListener('click', () => closeMenu(true));
+  sheet.addEventListener('click', (e) => { if (e.target === sheet) closeMenu(true); });
+  sheet.querySelectorAll('.menu-list a').forEach((a) => a.addEventListener('click', () => closeMenu(false)));
+  document.addEventListener('keydown', (e) => {
+    if (sheet.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); return; }
+    if (e.key !== 'Tab') return;
+    const f = [...sheet.querySelectorAll('a, button')];
+    if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+    else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+  });
+  const gnb = $('#gnb');
+  const onScroll = () => gnb.classList.toggle('scrolled', window.scrollY > 4);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  // 본문 바로가기: 주소(#)를 바꾸지 않고 초점만 옮긴다(주소가 바뀌면 화면 전환으로 처리되기 때문)
+  $('.skip').addEventListener('click', (e) => { e.preventDefault(); $('#main').focus(); });
+  setupQuickPlan();
+  observeReveal();
 }
 
 // ---------------------------------------------------------------- 오프라인(공연장 주변 통신 혼잡 대비)
@@ -865,7 +1314,7 @@ function updateNetBanner() {
   b.textContent = `오프라인 상태예요. 마지막으로 저장된 예보(공연정보 ${STATE.events ? STATE.events.generatedAt.slice(0, 10) : ''} 기준)를 보여 드려요. 연결되면 실시간 주차현황을 다시 불러와요.`;
 }
 window.addEventListener('offline', updateNetBanner);
-window.addEventListener('online', async () => { updateNetBanner(); if (STATE.model) { await fetchLive(); updateFreshness(); route(); } });
+window.addEventListener('online', async () => { updateNetBanner(); if (STATE.model) { await fetchLive(); updateLivePill(); route(); } });
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => { /* 지원 안 함 */ }); });
 }
@@ -895,13 +1344,20 @@ async function main() {
   }
   setupTheme();
   setupOps();
+  setupChrome();
   updateNetBanner();
   route();
-  updateFreshness();
+  updateLivePill();
   document.body.classList.remove('loading');
   await Promise.all([fetchLive(), fetchWeather()]);
-  updateFreshness();
+  updateLivePill();
   route();
-  setInterval(async () => { await fetchLive(); updateFreshness(); if (!document.hidden && (location.hash || '#forecast').startsWith('#forecast')) renderForecast(); }, LIVE_REFRESH_MS);
+  setInterval(async () => {
+    await fetchLive();
+    updateLivePill();
+    if (document.hidden) return;
+    if (STATE.view === 'forecast') renderForecast();
+    else if (STATE.view === 'home') renderHome();
+  }, LIVE_REFRESH_MS);
 }
 main();
