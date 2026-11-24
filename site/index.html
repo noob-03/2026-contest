@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>올팍캐스트 · 올림픽공원 혼잡 예보</title>
+  <meta name="description" content="올림픽공원 공연·주차·날씨 공공데이터로 시간대별 혼잡을 일기예보처럼 알려주는 서비스. 한국체육산업개발(주) 개방 공공데이터 활용.">
+  <meta name="theme-color" content="#0b3d91">
+  <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    try { const t = localStorage.getItem('olpark-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="#forecast" aria-label="올팍캐스트 홈">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="13" r="6.5" fill="var(--accent)"/><path d="M8 25h17.5a5.5 5.5 0 0 0 0-11 7 7 0 0 0-13.3 2.2A4.4 4.4 0 0 0 8 25Z" fill="var(--brand)"/></svg>
+        <span class="brand-text"><strong>올팍캐스트</strong><small>올림픽공원 혼잡 예보</small></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="freshness" id="freshness" aria-live="polite"></span>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="화면 모드 전환" title="화면 모드 전환">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="tabs wrap" aria-label="주요 메뉴">
+      <a href="#forecast" data-tab="forecast">혼잡 예보</a>
+      <a href="#plan" data-tab="plan">방문 플래너</a>
+      <a href="#calendar" data-tab="calendar">공연 캘린더</a>
+      <a href="#insights" data-tab="insights">데이터 인사이트</a>
+      <a href="#about" data-tab="about">서비스 소개</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <!-- 혼잡 예보 -->
+    <section id="view-forecast" class="view" data-view="forecast" aria-labelledby="h-forecast">
+      <h1 id="h-forecast" class="sr-only">혼잡 예보</h1>
+      <div class="date-strip" id="dateStrip" role="tablist" aria-label="예보 날짜 선택"></div>
+      <div class="grid-2">
+        <article class="card hero" id="heroCard" aria-live="polite"></article>
+        <article class="card live" id="liveCard"></article>
+      </div>
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="chartTitle">시간대별 혼잡 예보</h2>
+            <p class="card-sub" id="chartSub">동2·남2·북2문 주차장(2,200면) 예상 이용률</p>
+          </div>
+          <ul class="legend" id="levelLegend" aria-label="혼잡 단계"></ul>
+        </div>
+        <div class="chart" id="forecastChart"></div>
+        <details class="table-view"><summary>표로 보기</summary><div id="forecastTable"></div></details>
+      </article>
+      <div class="grid-2">
+        <article class="card">
+          <h2 class="card-title">이날의 공연·행사</h2>
+          <div id="dayShows" class="show-list"></div>
+        </article>
+        <article class="card">
+          <h2 class="card-title">한눈에 보는 방문 팁</h2>
+          <ul id="dayTips" class="tips"></ul>
+        </article>
+      </div>
+      <article class="card">
+        <h2 class="card-title">7일 혼잡 전망</h2>
+        <div id="weekOutlook" class="week"></div>
+      </article>
+    </section>
+
+    <!-- 방문 플래너 -->
+    <section id="view-plan" class="view" data-view="plan" aria-labelledby="h-plan" hidden>
+      <article class="card">
+        <h1 id="h-plan" class="card-title">방문 플래너</h1>
+        <p class="card-sub">방문 목적과 날짜를 고르면 도착 시간·출입문·주차장·대중교통을 데이터로 추천합니다.</p>
+        <form id="planForm" class="plan-form">
+          <fieldset>
+            <legend>방문 목적</legend>
+            <div class="seg" id="purposeSeg">
+              <label><input type="radio" name="purpose" value="show" checked><span>공연 관람</span></label>
+              <label><input type="radio" name="purpose" value="walk"><span>산책·나들이</span></label>
+              <label><input type="radio" name="purpose" value="sports"><span>운동·수영</span></label>
+              <label><input type="radio" name="purpose" value="kids"><span>아이와 함께</span></label>
+            </div>
+          </fieldset>
+          <div class="form-row">
+            <label class="field"><span>날짜</span><select id="planDate" name="date"></select></label>
+            <label class="field" id="planShowField"><span>공연</span><select id="planShow" name="show"></select></label>
+            <label class="field"><span>이동 수단</span>
+              <select id="planMode" name="mode"><option value="car">자가용</option><option value="transit">대중교통</option></select>
+            </label>
+          </div>
+        </form>
+      </article>
+      <div id="planResult" class="plan-result" aria-live="polite"></div>
+    </section>
+
+    <!-- 공연 캘린더 -->
+    <section id="view-calendar" class="view" data-view="calendar" aria-labelledby="h-cal" hidden>
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <h1 id="h-cal" class="card-title">공연 캘린더 · 혼잡 전망</h1>
+            <p class="card-sub">올림픽공원 공연정보와 예보 모델로 계산한 날짜별 최대 혼잡도</p>
+          </div>
+          <div class="month-nav">
+            <button type="button" class="icon-btn" id="calPrev" aria-label="이전 달">‹</button>
+            <strong id="calLabel"></strong>
+            <button type="button" class="icon-btn" id="calNext" aria-label="다음 달">›</button>
+          </div>
+        </div>
+        <div id="calendarGrid" class="calendar"></div>
+        <div class="cls-legend" id="clsLegend"></div>
+      </article>
+    </section>
+
+    <!-- 데이터 인사이트 -->
+    <section id="view-insights" class="view" data-view="insights" aria-labelledby="h-ins" hidden>
+      <h1 id="h-ins" class="sr-only">데이터 인사이트</h1>
+      <div class="stats" id="statTiles"></div>
+      <article class="card">
+        <h2 class="card-title">같은 일요일, 다른 주차장 — 관객층이 주차 수요를 가른다</h2>
+        <p class="card-sub" id="caseSub"></p>
+        <div class="chart" id="caseChart"></div>
+        <details class="table-view"><summary>표로 보기</summary><div id="caseTable"></div></details>
+      </article>
+      <div class="grid-2">
+        <article class="card">
+          <h2 class="card-title">요일별 기본 혼잡 패턴</h2>
+          <p class="card-sub">공연 영향을 뺀 시간대별 점유대수(모델 추정, 2024년 7월 기준)</p>
+          <div class="chart" id="profileChart"></div>
+          <details class="table-view"><summary>표로 보기</summary><div id="profileTable"></div></details>
+        </article>
+        <article class="card">
+          <h2 class="card-title">계절별 주차 수요</h2>
+          <p class="card-sub">올림픽공원 월별 주차대수(월별주차현황, 2023~2025)</p>
+          <div class="chart" id="monthlyChart"></div>
+          <details class="table-view"><summary>표로 보기</summary><div id="monthlyTable"></div></details>
+        </article>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <h2 class="card-title">먼저 차는 주차구역</h2>
+          <p class="card-sub" id="lotSub">주차장 혼잡도 정보에서 '만차'로 기록된 비율</p>
+          <div class="chart" id="lotChart"></div>
+        </article>
+        <article class="card">
+          <h2 class="card-title">얼마나 머무를까</h2>
+          <p class="card-sub">입출차 기록으로 본 주차 시간 분포(2024년 7월)</p>
+          <div class="chart" id="stayChart"></div>
+        </article>
+      </div>
+      <article class="card">
+        <h2 class="card-title">예보 정확도 검증</h2>
+        <p class="card-sub" id="btSub"></p>
+        <div id="backtestTable" class="table-wrap"></div>
+      </article>
+    </section>
+
+    <!-- 소개 -->
+    <section id="view-about" class="view prose" data-view="about" aria-labelledby="h-about" hidden>
+      <article class="card">
+        <h1 id="h-about" class="card-title">올팍캐스트는 이렇게 만들었습니다</h1>
+        <p>올림픽공원에는 KSPO DOME, 티켓링크 라이브 아레나, 올림픽홀, 우리금융아트홀 등 공연장이 모여 있어 큰 공연이 열리는 날이면 주차장과 출입문이 한꺼번에 붐빕니다. 올팍캐스트는 한국체육산업개발(주)이 개방한 공공데이터를 엮어 <strong>‘언제, 얼마나 붐비는지’를 날씨 예보처럼</strong> 미리 알려 주고, 방문 목적에 맞춰 도착 시간과 이동 방법을 추천합니다.</p>
+        <h2>예보 방법</h2>
+        <ol>
+          <li><strong>기본 패턴</strong> — 입출차 기록 215,528건으로 30분 단위 주차장 점유대수를 복원하고, 평일·토요일·일요일(공휴일) 패턴을 추정합니다.</li>
+          <li><strong>공연 영향</strong> — 공연정보의 공연장·시작시각·공연시간을 읽어, 좌석수 × 관객유형 계수 × 도착·체류·퇴장 곡선으로 공연이 더하는 주차 수요를 계산합니다. 관객유형 계수는 실제 공연일 기록으로 추정했습니다.</li>
+          <li><strong>계절·날씨 보정</strong> — 월별주차현황으로 계절 계수를, 강수 예보로 나들이 수요를 보정합니다.</li>
+          <li><strong>실시간 보정</strong> — 오늘 예보는 실시간 주차현황 값과의 차이를 반영해 남은 시간대를 다시 계산합니다.</li>
+        </ol>
+        <h2>활용한 공공데이터</h2>
+        <div id="sourceTable" class="table-wrap"></div>
+        <h2>한계와 다음 단계</h2>
+        <ul id="limits">
+          <li>학습에 쓴 입출차 기록은 2024년 7월 한 달치입니다. 2025년 연간 ‘차량입출차·공연·날씨 연계 데이터’(OpenAPI)를 연결하면 계절·날씨 계수를 실측으로 다시 추정할 수 있습니다.</li>
+          <li>관객유형(자가용 집중형·대중교통 중심형·혼합형)은 공연명과 검수표로 분류합니다. 예매처의 예매자 연령대 통계가 개방되면 자동화할 수 있습니다.</li>
+          <li>예보는 동2·남2·북2문 주차장(2,200면) 기준입니다. 남3문·남4문·서1문·서2문 주차장은 실시간 데이터가 없어 대안 안내로만 제공합니다.</li>
+        </ul>
+        <p class="muted small" id="buildInfo"></p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>데이터 출처: 한국체육산업개발(주) 공공데이터(공공데이터포털 data.go.kr), 올림픽공원 공연정보, 실시간 주차현황 API · 날씨: Open-Meteo</p>
+      <p>예보는 참고용이며 실제 상황과 다를 수 있습니다. 대형 공연일에는 대중교통 이용을 권장합니다.</p>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="status" hidden></div>
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

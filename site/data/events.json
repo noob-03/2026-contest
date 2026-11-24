@@ -1,0 +1,3287 @@
+{
+ "generatedAt": "2026-11-24T17:23+09:00",
+ "byDate": {
+  "2026-09-26": [
+   {
+    "evtSeq": 5143,
+    "title": "Silica Gel Asia Tour 〈Syn.THE.Size: Ballad of You〉 in Seoul",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5143"
+   },
+   {
+    "evtSeq": 5151,
+    "title": "2026 Redoor 단독콘서트 〈Memory〉",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5151"
+   }
+  ],
+  "2026-09-27": [
+   {
+    "evtSeq": 5143,
+    "title": "Silica Gel Asia Tour 〈Syn.THE.Size: Ballad of You〉 in Seoul",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5143"
+   },
+   {
+    "evtSeq": 5151,
+    "title": "2026 Redoor 단독콘서트 〈Memory〉",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5151"
+   }
+  ],
+  "2026-10-03": [
+   {
+    "evtSeq": 5149,
+    "title": "＂IDOL1ST KENTY＂ ASIA TOUR 2026 in SEOUL",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5149"
+   },
+   {
+    "evtSeq": 5146,
+    "title": "2026 ＆TEAM CONCERT TOUR ‘BLAZE THE WAY’ ENCORE in KSPO DOME",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5146"
+   }
+  ],
+  "2026-10-04": [
+   {
+    "evtSeq": 5149,
+    "title": "＂IDOL1ST KENTY＂ ASIA TOUR 2026 in SEOUL",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5149"
+   },
+   {
+    "evtSeq": 5146,
+    "title": "2026 ＆TEAM CONCERT TOUR ‘BLAZE THE WAY’ ENCORE in KSPO DOME",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5146"
+   }
+  ],
+  "2026-10-09": [
+   {
+    "evtSeq": 5147,
+    "title": "2026 AKMU CONCERT [ 소문의 낙원（Paradise of Rumors）]",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5147"
+   }
+  ],
+  "2026-10-10": [
+   {
+    "evtSeq": 5147,
+    "title": "2026 AKMU CONCERT [ 소문의 낙원（Paradise of Rumors）]",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5147"
+   },
+   {
+    "evtSeq": 5152,
+    "title": "2026 10CM FAN CONCERT 〈THE MISSING TRACKS〉 사라진 곡들의 행방",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5152"
+   }
+  ],
+  "2026-10-11": [
+   {
+    "evtSeq": 5147,
+    "title": "2026 AKMU CONCERT [ 소문의 낙원（Paradise of Rumors）]",
+    "venue": "KSPO DOME",
+    "start": 960,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5147"
+   }
+  ],
+  "2026-10-17": [
+   {
+    "evtSeq": 5148,
+    "title": "그랜드 민트 페스티벌 2026",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "추정",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5148"
+   },
+   {
+    "evtSeq": 5154,
+    "title": "NEXZ 1ST ASIA TOUR 〈SAUCIN’ THE WORLD〉",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5154"
+   }
+  ],
+  "2026-10-18": [
+   {
+    "evtSeq": 5154,
+    "title": "NEXZ 1ST ASIA TOUR 〈SAUCIN’ THE WORLD〉",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5154"
+   },
+   {
+    "evtSeq": 5148,
+    "title": "그랜드 민트 페스티벌 2026",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "추정",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5148"
+   }
+  ],
+  "2026-10-23": [
+   {
+    "evtSeq": 5162,
+    "title": "잔나비 발라드 컬렉션 <10월의 어느 멋진 날에> in 서울",
+    "venue": "KSPO DOME",
+    "start": 1170,
+    "dur": 130,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5162"
+   }
+  ],
+  "2026-10-24": [
+   {
+    "evtSeq": 5153,
+    "title": "2026 소수빈 단독공연 〈늘 그래왔던 것처럼 앞으로도〉",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5153"
+   },
+   {
+    "evtSeq": 5155,
+    "title": "2026 심규선 단독 콘서트［SANCTUARY］",
+    "venue": "우리금융아트홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5155"
+   },
+   {
+    "evtSeq": 5163,
+    "title": "잔나비 2026 ASIA TOUR FINAL <스웨트 앤 스타더스트> in 서울",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 140,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5163"
+   }
+  ],
+  "2026-10-25": [
+   {
+    "evtSeq": 5153,
+    "title": "2026 소수빈 단독공연 〈늘 그래왔던 것처럼 앞으로도〉",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5153"
+   },
+   {
+    "evtSeq": 5155,
+    "title": "2026 심규선 단독 콘서트［SANCTUARY］",
+    "venue": "우리금융아트홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5155"
+   },
+   {
+    "evtSeq": 5163,
+    "title": "잔나비 2026 ASIA TOUR FINAL <스웨트 앤 스타더스트> in 서울",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 140,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5163"
+   }
+  ],
+  "2026-10-30": [
+   {
+    "evtSeq": 5156,
+    "title": "2026 ONEW CONCERT [ONEW THE LIVE : Q] IN SEOUL",
+    "venue": "올림픽홀",
+    "start": 1168,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5156"
+   }
+  ],
+  "2026-10-31": [
+   {
+    "evtSeq": 5156,
+    "title": "2026 ONEW CONCERT [ONEW THE LIVE : Q] IN SEOUL",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5156"
+   },
+   {
+    "evtSeq": 5155,
+    "title": "2026 심규선 단독 콘서트［SANCTUARY］",
+    "venue": "우리금융아트홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5155"
+   },
+   {
+    "evtSeq": 5164,
+    "title": "2026 WOODZ WORLD TOUR Archive. 1 : Completed",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5164"
+   }
+  ],
+  "2026-11-01": [
+   {
+    "evtSeq": 5156,
+    "title": "2026 ONEW CONCERT [ONEW THE LIVE : Q] IN SEOUL",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5156"
+   },
+   {
+    "evtSeq": 5155,
+    "title": "2026 심규선 단독 콘서트［SANCTUARY］",
+    "venue": "우리금융아트홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5155"
+   },
+   {
+    "evtSeq": 5164,
+    "title": "2026 WOODZ WORLD TOUR Archive. 1 : Completed",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5164"
+   }
+  ],
+  "2026-11-06": [
+   {
+    "evtSeq": 5157,
+    "title": "EXO PLANET #6 - EXhOrizon [dot] -",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5157"
+   }
+  ],
+  "2026-11-07": [
+   {
+    "evtSeq": 5169,
+    "title": "코리아발레스타즈 호두까기인형",
+    "venue": "우리금융아트홀",
+    "start": 960,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5169"
+   },
+   {
+    "evtSeq": 5157,
+    "title": "EXO PLANET #6 - EXhOrizon [dot] -",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5157"
+   },
+   {
+    "evtSeq": 5166,
+    "title": "2026 박재정 콘서트 - 기록",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5166"
+   }
+  ],
+  "2026-11-08": [
+   {
+    "evtSeq": 5169,
+    "title": "코리아발레스타즈 호두까기인형",
+    "venue": "우리금융아트홀",
+    "start": 960,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5169"
+   },
+   {
+    "evtSeq": 5157,
+    "title": "EXO PLANET #6 - EXhOrizon [dot] -",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5157"
+   },
+   {
+    "evtSeq": 5166,
+    "title": "2026 박재정 콘서트 - 기록",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "자동",
+    "clsNote": "기본값(혼합형)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5166"
+   }
+  ],
+  "2026-11-13": [
+   {
+    "evtSeq": 5165,
+    "title": "TOMORROW X TOGETHER WORLD TOUR 〈STEAL THE WIND〉 IN SEOUL",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5165"
+   }
+  ],
+  "2026-11-14": [
+   {
+    "evtSeq": 5165,
+    "title": "TOMORROW X TOGETHER WORLD TOUR 〈STEAL THE WIND〉 IN SEOUL",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5165"
+   },
+   {
+    "evtSeq": 5167,
+    "title": "2026 CRAVITY CONCERT 〈SONOROUS〉 in Seoul",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5167"
+   }
+  ],
+  "2026-11-15": [
+   {
+    "evtSeq": 5167,
+    "title": "2026 CRAVITY CONCERT 〈SONOROUS〉 in Seoul",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "자동",
+    "clsNote": "팬덤·해외투어형 공연명",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5167"
+   }
+  ],
+  "2026-11-21": [
+   {
+    "evtSeq": 5158,
+    "title": "2026-27 로이킴 LIVE TOUR ［R:O:Y］ in SEOUL",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "로이킴 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5158"
+   }
+  ],
+  "2026-11-22": [
+   {
+    "evtSeq": 5158,
+    "title": "2026-27 로이킴 LIVE TOUR ［R:O:Y］ in SEOUL",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "로이킴 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5158"
+   }
+  ],
+  "2026-11-27": [
+   {
+    "evtSeq": 5159,
+    "title": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 130,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "조용필 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159"
+   },
+   {
+    "evtSeq": 5168,
+    "title": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+    "venue": "올림픽홀",
+    "start": 1200,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "다이나믹 듀오 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168"
+   }
+  ],
+  "2026-11-28": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5159,
+    "title": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 130,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "조용필 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159"
+   },
+   {
+    "evtSeq": 5168,
+    "title": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "다이나믹 듀오 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-11-29": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5159,
+    "title": "[서울] 2026 조용필 ＆ 위대한탄생 콘서트",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 130,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "조용필 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5159"
+   },
+   {
+    "evtSeq": 5168,
+    "title": "2026 다이나믹 듀오 단독 콘서트 ＂가끔씩 오래 보자＂ - 서울",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "다이나믹 듀오 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5168"
+   }
+  ],
+  "2026-12-02": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-03": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-04": [
+   {
+    "evtSeq": 5161,
+    "title": "[서울] 2026 이승철 40주년 콘서트 [THE VOICE: LEE SEUNG CHUL]",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "이승철 40주년 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5161"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-05": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5161,
+    "title": "[서울] 2026 이승철 40주년 콘서트 [THE VOICE: LEE SEUNG CHUL]",
+    "venue": "KSPO DOME",
+    "start": 960,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "이승철 40주년 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5161"
+   },
+   {
+    "evtSeq": 5171,
+    "title": "2026 비 (RAIN) CONCERT [THE SMOKE]",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "비(RAIN) — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5171"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-06": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5161,
+    "title": "[서울] 2026 이승철 40주년 콘서트 [THE VOICE: LEE SEUNG CHUL]",
+    "venue": "KSPO DOME",
+    "start": 960,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "이승철 40주년 — 중장년 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5161"
+   },
+   {
+    "evtSeq": 5171,
+    "title": "2026 비 (RAIN) CONCERT [THE SMOKE]",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "비(RAIN) — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5171"
+   }
+  ],
+  "2026-12-09": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-10": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-11": [
+   {
+    "evtSeq": 5172,
+    "title": "2026 박지현 팬콘서트 〈멤버쉽 시즌2：2026 박지현 어워즈〉",
+    "venue": "올림픽홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "박지현 — 트로트 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5172"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-12": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5172,
+    "title": "2026 박지현 팬콘서트 〈멤버쉽 시즌2：2026 박지현 어워즈〉",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "박지현 — 트로트 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5172"
+   },
+   {
+    "evtSeq": 5170,
+    "title": "2026 DAVICHI CONCERT 〈IN OUR SCENES〉",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "다비치 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5170"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-13": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5172,
+    "title": "2026 박지현 팬콘서트 〈멤버쉽 시즌2：2026 박지현 어워즈〉",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "박지현 — 트로트 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5172"
+   },
+   {
+    "evtSeq": 5170,
+    "title": "2026 DAVICHI CONCERT 〈IN OUR SCENES〉",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "다비치 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5170"
+   }
+  ],
+  "2026-12-16": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-17": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-18": [
+   {
+    "evtSeq": 5178,
+    "title": "2026 DAY6 Special Concert ‘The Present’",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "DAY6 — 20대 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5174,
+    "title": "자우림 단독 콘서트 ［ MIDNIGHT EXPRESS 2026-2027 ］ - 서울",
+    "venue": "올림픽홀",
+    "start": 1200,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "자우림 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5174"
+   }
+  ],
+  "2026-12-19": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5174,
+    "title": "자우림 단독 콘서트 ［ MIDNIGHT EXPRESS 2026-2027 ］ - 서울",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "자우림 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5174"
+   },
+   {
+    "evtSeq": 5178,
+    "title": "2026 DAY6 Special Concert ‘The Present’",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "DAY6 — 20대 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-20": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5178,
+    "title": "2026 DAY6 Special Concert ‘The Present’",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "DAY6 — 20대 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5178"
+   }
+  ],
+  "2026-12-23": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-24": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5179,
+    "title": "2026 THE BOYZ CONCERT : ZENERATION III",
+    "venue": "KSPO DOME",
+    "start": 1170,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "THE BOYZ — 아이돌 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5179"
+   },
+   {
+    "evtSeq": 5173,
+    "title": "2026 박진영 콘서트 〈WET〉",
+    "venue": "올림픽홀",
+    "start": 1200,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "박진영 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5173"
+   }
+  ],
+  "2026-12-25": [
+   {
+    "evtSeq": 5173,
+    "title": "2026 박진영 콘서트 〈WET〉",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "박진영 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5173"
+   },
+   {
+    "evtSeq": 5179,
+    "title": "2026 THE BOYZ CONCERT : ZENERATION III",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "THE BOYZ — 아이돌 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5179"
+   },
+   {
+    "evtSeq": 5182,
+    "title": "2026 CRUSH CONCERT [CRUSH H♥UR]",
+    "venue": "티켓링크 라이브 아레나",
+    "start": 1110,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "크러쉬 — 20~30대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5182"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-26": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5179,
+    "title": "2026 THE BOYZ CONCERT : ZENERATION III",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "THE BOYZ — 아이돌 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5179"
+   },
+   {
+    "evtSeq": 5173,
+    "title": "2026 박진영 콘서트 〈WET〉",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "박진영 — 30~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5173"
+   },
+   {
+    "evtSeq": 5182,
+    "title": "2026 CRUSH CONCERT [CRUSH H♥UR]",
+    "venue": "티켓링크 라이브 아레나",
+    "start": 1080,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "크러쉬 — 20~30대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5182"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-27": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5179,
+    "title": "2026 THE BOYZ CONCERT : ZENERATION III",
+    "venue": "KSPO DOME",
+    "start": 960,
+    "dur": 120,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "THE BOYZ — 아이돌 팬덤",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5179"
+   }
+  ],
+  "2026-12-30": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2026-12-31": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5177,
+    "title": "2026 성시경 연말 콘서트 〈성시경〉",
+    "venue": "KSPO DOME",
+    "start": 1260,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "성시경 연말 콘서트 — 30~50대 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5177"
+   }
+  ],
+  "2027-01-01": [
+   {
+    "evtSeq": 5177,
+    "title": "2026 성시경 연말 콘서트 〈성시경〉",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "성시경 연말 콘서트 — 30~50대 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5177"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1170,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2027-01-02": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 900,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5177,
+    "title": "2026 성시경 연말 콘서트 〈성시경〉",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "성시경 연말 콘서트 — 30~50대 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5177"
+   },
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 1140,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   }
+  ],
+  "2027-01-03": [
+   {
+    "evtSeq": 5136,
+    "title": "최현우 30주년 기념 공연 - LEGACY",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "마술 공연 — 가족·30~40대 관객",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5136"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5177,
+    "title": "2026 성시경 연말 콘서트 〈성시경〉",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "성시경 연말 콘서트 — 30~50대 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5177"
+   }
+  ],
+  "2027-01-09": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5180,
+    "title": "2027 손태진 전국투어 콘서트 ‘Bon Voyage’ - 서울",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "손태진 — 트로트·크로스오버 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5180"
+   }
+  ],
+  "2027-01-10": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5180,
+    "title": "2027 손태진 전국투어 콘서트 ‘Bon Voyage’ - 서울",
+    "venue": "올림픽홀",
+    "start": 960,
+    "dur": 150,
+    "cls": "A",
+    "clsSrc": "검수",
+    "clsNote": "손태진 — 트로트·크로스오버 팬층",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5180"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-12": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-13": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-14": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-15": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5181,
+    "title": "TAEYEON CONCERT - F.L.Y. in Seoul",
+    "venue": "KSPO DOME",
+    "start": 1140,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "태연 — 아이돌 솔로",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5181"
+   }
+  ],
+  "2027-01-16": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5181,
+    "title": "TAEYEON CONCERT - F.L.Y. in Seoul",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "태연 — 아이돌 솔로",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5181"
+   },
+   {
+    "evtSeq": 5184,
+    "title": "HYUKOH [33] TOUR - SEOUL",
+    "venue": "올림픽홀",
+    "start": 1080,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "혁오 — 20대 중심",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5184"
+   }
+  ],
+  "2027-01-17": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5181,
+    "title": "TAEYEON CONCERT - F.L.Y. in Seoul",
+    "venue": "KSPO DOME",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "태연 — 아이돌 솔로",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5181"
+   },
+   {
+    "evtSeq": 5184,
+    "title": "HYUKOH [33] TOUR - SEOUL",
+    "venue": "올림픽홀",
+    "start": 1020,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "혁오 — 20대 중심",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5184"
+   }
+  ],
+  "2027-01-19": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-20": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-21": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-22": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5176,
+    "title": "2027 에픽하이 콘서트",
+    "venue": "KSPO DOME",
+    "start": 1200,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "에픽하이 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5176"
+   }
+  ],
+  "2027-01-23": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5176,
+    "title": "2027 에픽하이 콘서트",
+    "venue": "KSPO DOME",
+    "start": 1080,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "에픽하이 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5176"
+   }
+  ],
+  "2027-01-24": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5176,
+    "title": "2027 에픽하이 콘서트",
+    "venue": "KSPO DOME",
+    "start": 960,
+    "dur": 120,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "에픽하이 — 20~40대",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5176"
+   }
+  ],
+  "2027-01-26": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-27": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-28": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-29": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-30": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-01-31": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-02": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-03": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-04": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5175,
+    "title": "캣츠아이 첫 단독 내한공연",
+    "venue": "KSPO DOME",
+    "start": 1170,
+    "dur": 150,
+    "cls": "B",
+    "clsSrc": "검수",
+    "clsNote": "캣츠아이 — 10~20대 팬덤",
+    "timeSrc": "추정",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5175"
+   }
+  ],
+  "2027-02-05": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-06": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-07": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-08": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-09": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-10": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-11": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-12": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-13": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-14": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-16": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-17": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-18": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-19": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-20": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-21": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-23": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-24": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-25": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-26": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-27": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 990,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-02-28": [
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 660,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   },
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   },
+   {
+    "evtSeq": 5183,
+    "title": "뮤지컬 〈사랑의 하츄핑: 고래보석의 전설〉",
+    "venue": "우리금융아트홀",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5183"
+   }
+  ],
+  "2027-03-01": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-06": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-07": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-13": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-14": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-20": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-21": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-27": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-03-28": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-03": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-04": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-10": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-11": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-17": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ],
+  "2027-04-18": [
+   {
+    "evtSeq": 5185,
+    "title": "뮤지컬 〈폭풍우 치는 밤에〉",
+    "venue": "뮤즈라이브",
+    "start": 840,
+    "dur": 70,
+    "cls": "C",
+    "clsSrc": "검수",
+    "clsNote": "어린이 뮤지컬 (24개월 이상)",
+    "timeSrc": "공연정보",
+    "url": "https://www.ksponco.or.kr/olympicpark/eventInfo/eventInfoView.es?mid=a20301010100&evtSeq=5185"
+   }
+  ]
+ }
+}

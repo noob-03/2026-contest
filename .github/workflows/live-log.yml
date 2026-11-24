@@ -1,0 +1,40 @@
+# 실시간 주차현황 API 값을 30분마다 기록해 live-data 브랜치에 쌓는다(모델 재학습용).
+# 필요 없으면 저장소 Actions 화면에서 이 워크플로를 비활성화하면 된다.
+name: 실시간 주차현황 기록
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-log
+  cancel-in-progress: false
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: live-data 브랜치 준비
+        run: |
+          git init -q live && cd live
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 1 origin live-data; then git checkout -q -b live-data FETCH_HEAD; else git checkout -q --orphan live-data; fi
+      - name: 실시간 값 기록
+        run: |
+          cd live
+          [ -f parking_live.csv ] || echo "kst_time,parking_sum" > parking_live.csv
+          v=$(curl -fsS --max-time 30 "https://www.ksponco.or.kr/online/main/parkingorsApi.do?apiKey=PARKING21803504" | python3 -c "import sys,json; d=json.load(sys.stdin); print((d[0] if isinstance(d,list) else d)['parking_sum'])")
+          echo "$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M'),$v" >> parking_live.csv
+          tail -1 parking_live.csv
+      - name: 커밋
+        run: |
+          cd live
+          git config user.name "olparkcast-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add parking_live.csv
+          git commit -q -m "실시간 주차현황 기록" || exit 0
+          git push -q origin HEAD:live-data

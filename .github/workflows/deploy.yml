@@ -1,0 +1,51 @@
+# 공연정보를 매일 새로 받아 예보 데이터를 다시 만들고 GitHub Pages로 배포한다.
+name: 데이터 갱신·배포
+
+on:
+  push:
+    paths: ["site/**", "pipeline/**", "data/**", ".github/workflows/deploy.yml"]
+  schedule:
+    - cron: "17 20 * * *"   # 매일 05:17 KST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # 기본 브랜치에서만 배포(github-pages 환경은 기본 브랜치 배포만 허용)
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r pipeline/requirements.txt
+      - name: 올림픽공원 공연정보 갱신
+        run: python pipeline/fetch_events.py
+        continue-on-error: true   # 원천 사이트 장애 시 저장된 일정으로 계속
+      - name: 예보 모델·데이터 생성
+        run: python pipeline/build_model.py
+        env:
+          OLPARK_FAST: ${{ github.event_name == 'schedule' && '1' || '0' }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
